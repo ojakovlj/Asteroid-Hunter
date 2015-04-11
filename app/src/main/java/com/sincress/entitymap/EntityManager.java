@@ -75,7 +75,7 @@ public class EntityManager {
         if(entity.getType() == Entity.EntityType.ImgText)
             textView.setText(((ImgTextEntity)entity).textContent);
         //else
-          //  textView.setText(((Planet)entity).textContent);
+        //  textView.setText(((Planet)entity).textContent);
     }
 
     public static View.OnTouchListener onTouchListener = new View.OnTouchListener() {
