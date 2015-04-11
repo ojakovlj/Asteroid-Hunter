@@ -1,13 +1,15 @@
-package com.sincress.entitymap;
+package com.sincress.entitymap.Entities;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
+import com.sincress.entitymap.Abstract.Entity;
+
 import java.util.Date;
 
-public class ImgTextEntity implements Entity{
+public class ImgTextEntity implements Entity {
 
     private String boxTitle, imageFile, textContent;
     private int X, Y;
@@ -37,7 +39,7 @@ public class ImgTextEntity implements Entity{
 
         // Text
         paint.setColor(Color.BLACK);
-        canvas.drawText(boxTitle, X + 7, Y + BOX_HEIGHT-15, paint);
+        canvas.drawText(boxTitle, X + 7, Y + BOX_HEIGHT - 15, paint);
     }
 
     @Override
