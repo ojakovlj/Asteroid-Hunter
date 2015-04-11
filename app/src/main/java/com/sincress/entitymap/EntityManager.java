@@ -4,19 +4,16 @@ package com.sincress.entitymap;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sincress.entitymap.Abstract.Entity;
-import com.sincress.entitymap.DataParser.*;
 import com.sincress.entitymap.Entities.Asteroid;
 import com.sincress.entitymap.Entities.ImgTextEntity;
 import com.sincress.entitymap.EntityCanvas.Connector;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class EntityManager {
@@ -114,12 +111,7 @@ public class EntityManager {
                 }
                 // Type = Asteroid
                 else if (clickedEntity.getType() == Entity.EntityType.Asteroid){
-                    try {
-                        DataParser parser = new DataParser();
-                        entities.add(parser.getData(((Asteroid) clickedEntity).GetId()));
-                    }catch(IOException e){
-                        Log.e("ParseData: ","File IO Error");
-                    }
+                    entities.add( ((Asteroid) clickedEntity).getImgTextEntity());
                 }
                 // Type = Earth
                 else{

@@ -1,0 +1,16 @@
+{
+    "title": 'Itokawa',
+	"imgPath": 'path',
+    "id": 1,
+    "position": {
+        "x": 2781,
+        "y": 150.002
+    },
+    "description": 'isjdiahhasuhda skjdaisojdoisa sdjoaisjdiasn \n isjadioashdias shdoashd \n jdihasudbuqweuda',
+	"isNull": null,
+	"bool": true,
+	"benefits": {
+		"description": 'ijsdiahsudb sadhaisdn uhduasdn',
+		"title": 'Benefits of asteroid exploration'
+	}
+}

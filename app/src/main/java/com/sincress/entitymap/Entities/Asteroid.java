@@ -1,4 +1,5 @@
 package com.sincress.entitymap.Entities;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,11 +10,24 @@ import com.sincress.entitymap.Abstract.Entity;
 import com.sincress.entitymap.EntityManager;
 import com.sincress.entitymap.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+
 public class Asteroid implements Entity{
     private int id;
     private Point position;
     private boolean isSelected;
     private Bitmap bitmap;
+    private JSONObject json;
 
     public Asteroid(int id, Point position) {
         this.id = id;
@@ -60,5 +74,72 @@ public class Asteroid implements Entity{
     public int GetId()
     {
         return id;
+    }
+
+    public ImgTextEntity getImgTextEntity() {
+        if (json == null) json = readJson();
+        try {
+            String title = json.getString("title");
+
+            String imgPath = json.getString("imgPath");
+            String description = json.getString("description");
+
+            JSONObject positionJson = json.getJSONObject("position");
+            int x = positionJson.getInt("x");
+            int y = positionJson.getInt("y");
+            return new ImgTextEntity("title", "img", "text", new Point(x, y));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private JSONObject readJson() {
+        Resources res = EntityManager.entityCanvas.getResources();
+
+        int resource;
+        switch (id) {
+            case 1:
+            default:
+                resource = R.raw.asteroid1;
+                break;
+//            case 2:
+//                resource = R.raw.asteroid2;
+//                break;
+//            case 3:
+//                resource = R.raw.asteroid3;
+//                break;
+//            case 4:
+//                resource = R.raw.asteroid4;
+//                break;
+        }
+
+        InputStream is = res.openRawResource(resource);
+
+        Writer writer = new StringWriter();
+        char[] buffer = new char[1024];
+        String result = "";
+
+        try {
+            Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            int n;
+            while ((n = reader.read(buffer)) != -1) {
+                writer.write(buffer, 0, n);
+            }
+            result = writer.toString();
+            is.close();
+            writer.close();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            return new JSONObject(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
