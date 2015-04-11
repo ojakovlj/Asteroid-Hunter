@@ -39,7 +39,7 @@ public class ImgTextEntity implements Entity {
 
         // Text
         paint.setColor(Color.BLACK);
-        canvas.drawText(boxTitle, X + 7, Y + BOX_HEIGHT-15, paint);
+        canvas.drawText(boxTitle, X + 7, Y + BOX_HEIGHT - 15, paint);
     }
 
     @Override

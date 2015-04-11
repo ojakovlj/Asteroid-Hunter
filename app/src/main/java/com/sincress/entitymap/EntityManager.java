@@ -4,6 +4,11 @@ package com.sincress.entitymap;
 import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.View;
+<<<<<<< HEAD
+=======
+import android.widget.ImageView;
+import android.widget.TextView;
+>>>>>>> d20df035cfbdde2a657c6f3682e34778683885e9
 
 import com.sincress.entitymap.Abstract.Entity;
 import com.sincress.entitymap.EntityCanvas.Connector;
@@ -53,15 +58,13 @@ public class EntityManager {
      * @param fragmentview fragment's base view containing its elements.
      * @param entityCanvas canvas which is related to the activity on which we do our drawing
      */
-    public static void doFragmentAction(View fragmentview, EntityCanvas entityCanvas){
-       //When Close is clicked on the fragment, canvas is brought to front and no action is done
+    public static void loadFragmentData(View fragmentview, EntityCanvas entityCanvas, Entity entity){
+        //When Close is clicked on the fragment, canvas is brought to front and we obtain data
+        ImageView image = (ImageView) fragmentview.findViewById(R.id.image);
+        TextView textView = (TextView) fragmentview.findViewById(R.id.descText);
     }
 
     public static View.OnTouchListener onTouchListener = new View.OnTouchListener() {
-        long starttime;
-        float oldCameraX, oldCameraY, oldClickX, oldClickY;
-        boolean entityIsSelected = false;
-        Entity dragPoint1;
 
         /**
          * Handle entity selection and movement, view movement, scaling,
@@ -76,80 +79,33 @@ public class EntityManager {
             float cameraY = entityCanvas.getCameraCoords().y;
             ArrayList<Entity> entities = entityCanvas.getEntities();
             ArrayList<Connector> connectors = entityCanvas.getConnectors();
-            // ======================== ACTION DOWN ====================================
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                clickX = event.getX();
-                clickY = event.getY();
-                // Used to check if the long touch is static (for adding entities)
-                oldClickX = clickX;     oldClickY = clickY;
-                oldCameraX = cameraX;   oldCameraY = cameraY;
-
-                // If we started a drag, mark it here
-                dragPoint1 = EntityManager.isInEntity(entities,
-                        new Point((int)(clickX+cameraX), (int)(clickY+cameraY)));
-
-                //Start timer
-                starttime = System.currentTimeMillis();
-                return true;
-            }
             // ======================== ACTION UP ====================================
             if (event.getAction() == MotionEvent.ACTION_UP) {
+                // Check if entity is clicked
                 Entity clickedEntity = EntityManager.isInEntity(entities,
                         new Point((int) (event.getX() + cameraX), (int) (event.getY() + cameraY)));
 
-                // Add new connector if the drag start entity isnt the same as drag end entity
-                if( clickedEntity != null && dragPoint1 != null)
-                    if (!clickedEntity.equals(dragPoint1)) {
-                        connectors.add(new Connector(dragPoint1, clickedEntity));
-                        entityCanvas.postInvalidate();
-                        return true;
-                    }
-
-                // Toggle entity selection
-                if(clickedEntity != null) {
-                    entityIsSelected = false;
-                    clickedEntity.setSelected(!clickedEntity.isSelected()); // Invert selection
-                    for (Entity entity : entities)
-                        if(entity.isSelected())
-                            entityIsSelected = true;
-                    entityCanvas.postInvalidate(); // Redraw
+                // Type = ImgTextEntity
+                if(clickedEntity.getType() == 0){
+                    // Toggle the fragment and display the relevant data
+                    entityCanvas.getActivity().toggleFragment(v, clickedEntity);
                 }
-                else {   // Reset all entities' "selected" value
-                    for (Entity entity : entities)
-                        entity.setSelected(false);
-                    entityCanvas.postInvalidate();
-                    entityIsSelected = false;
+                // Type = Asteroid
+                else if (clickedEntity.getType() == 1){
+                    //entities.add(DataParser.getData((Asteroid)clickedEntity.getID()));
                 }
-                // Add a new entity if touch has been held for at least 500ms
-                // and if the camera did not move and if no entity has been clicked
-                if (oldCameraX == cameraX && oldCameraY == cameraY && !entityIsSelected &&
-                        event.getX() == clickX && event.getY() == clickY) { // To prevent unwanted popups
-                    if (System.currentTimeMillis() - starttime > 500) {
-                        // Now add the entity - call the prompt fragment
-                        entityCanvas.getActivity().toggleFragment(entityCanvas);
-                    }
+                // Type = Earth
+                else{
+                    // Toggle the fragment and display the relevant data
+                    entityCanvas.getActivity().toggleFragment(v, clickedEntity);
                 }
             }
             // ======================== ACTION MOVE ====================================
-            if( event.getAction() == MotionEvent.ACTION_MOVE){
-                // If one of the entities is selected, then MOVE entities, not canvas
-                for(Entity entity: entities) {
-                    if(entity.isSelected()) {
-                        entityIsSelected = true;
-                        entity.setPosition(new Point((int)(event.getX()),
-                                (int) (event.getY())));
-                        entityCanvas.postInvalidate();
-                    }
-                }
-                // If no entity is selected, we want to move the canvas
-                if(!entityIsSelected) {
-                    // If user has clicked on an entity he wants to drag a connector, so dont move the camera
-                    if(dragPoint1 != null)
-                        return true;
-                    clampCameraPosition(cameraX, cameraY, event, v);
-                    clickX = event.getX();
-                    clickY = event.getY();
-                }
+            if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                // Move the canvas
+                clampCameraPosition(cameraX, cameraY, event, v);
+                clickX = event.getX();
+                clickY = event.getY();
             }
             return false;
         }

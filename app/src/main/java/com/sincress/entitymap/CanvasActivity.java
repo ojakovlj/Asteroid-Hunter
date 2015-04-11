@@ -2,12 +2,11 @@ package com.sincress.entitymap;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Spinner;
+
+import com.sincress.entitymap.Abstract.Entity;
 
 public class CanvasActivity extends ActionBarActivity{
 
@@ -32,12 +31,14 @@ public class CanvasActivity extends ActionBarActivity{
      * adding new entities.
      * @param v view reference needed for XML onClick attribute
      */
-    public void toggleFragment(View v) {
+    public void toggleFragment(View v, Entity entity) {
         // Hide canvas, show prompt
         if (v == entityCanvas) {
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.group, fragment, "Prompt");
             transaction.commit();
+            // Obtain data from fragment
+            EntityManager.loadFragmentData(fragment.getView(), entityCanvas, entity);
             // Bring the fragment inside the group to front
             findViewById(R.id.group).bringToFront();
         } else { // Hide prompt, show canvas
@@ -47,8 +48,7 @@ public class CanvasActivity extends ActionBarActivity{
             transaction.remove(fragment);
             transaction.commit();
 
-            // Obtain data from fragment
-            EntityManager.doFragmentAction(fragment.getView(), entityCanvas);
+
         }
     }
 
