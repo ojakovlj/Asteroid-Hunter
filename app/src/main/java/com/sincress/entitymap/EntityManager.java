@@ -58,46 +58,7 @@ public class EntityManager {
      * @param entityCanvas canvas which is related to the activity on which we do our drawing
      */
     public static void doFragmentAction(View fragmentview, EntityCanvas entityCanvas){
-        EntityManager.entityCanvas = entityCanvas;
-        EditText dateView = (EditText) fragmentview.findViewById(R.id.dateField);
-        EditText descView = (EditText) fragmentview.findViewById(R.id.descField);
-        String color = ((Spinner) fragmentview.findViewById(R.id.colorSpinner)).getSelectedItem().toString();
-
-        int intColor = 0;
-        switch(color){
-            case "Red":
-                intColor = Color.RED;
-                break;
-            case "Blue":
-                intColor = Color.BLUE;
-                break;
-            case "Yellow":
-                intColor = Color.YELLOW;
-                break;
-            case "Green":
-                intColor = Color.GREEN;
-                break;
-            case "Magenta":
-                intColor = Color.MAGENTA;
-                break;
-            case "Gray":
-                intColor = Color.GRAY;
-                break;
-            case "Cyan":
-                intColor = Color.CYAN;
-                break;
-        }
-        Entity entity = new DateEventEntity(dateView.getText().toString(),
-                descView.getText().toString(),
-                intColor,
-                new Point((int)(clickX + entityCanvas.getCameraCoords().x),
-                        (int)(clickY + entityCanvas.getCameraCoords().y)));
-        entityCanvas.getEntities().add(entity);
-        // Call postInvalidate to redraw the scene
-        entityCanvas.postInvalidate();
-        // Reset the fields
-        dateView.setText("");   dateView.setHint("Date");
-        descView.setText("");   descView.setHint("Description");
+       //When Close is clicked on the fragment, canvas is brought to front and no action is done
     }
 
     public static View.OnTouchListener onTouchListener = new View.OnTouchListener() {
@@ -119,6 +80,7 @@ public class EntityManager {
             float cameraY = entityCanvas.getCameraCoords().y;
             ArrayList<Entity> entities = entityCanvas.getEntities();
             ArrayList<Connector> connectors = entityCanvas.getConnectors();
+            // ======================== ACTION DOWN ====================================
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 clickX = event.getX();
                 clickY = event.getY();
@@ -134,6 +96,7 @@ public class EntityManager {
                 starttime = System.currentTimeMillis();
                 return true;
             }
+            // ======================== ACTION UP ====================================
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 Entity clickedEntity = EntityManager.isInEntity(entities,
                         new Point((int) (event.getX() + cameraX), (int) (event.getY() + cameraY)));
@@ -171,6 +134,7 @@ public class EntityManager {
                     }
                 }
             }
+            // ======================== ACTION MOVE ====================================
             if( event.getAction() == MotionEvent.ACTION_MOVE){
                 // If one of the entities is selected, then MOVE entities, not canvas
                 for(Entity entity: entities) {

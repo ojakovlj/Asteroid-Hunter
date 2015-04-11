@@ -15,4 +15,6 @@ public interface Entity {
 
     public void setPosition(Point newposition);
     public Point getPosition();
+
+    public int getType();
 }
