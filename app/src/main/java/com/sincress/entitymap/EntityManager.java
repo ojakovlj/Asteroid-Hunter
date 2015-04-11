@@ -1,18 +1,22 @@
 package com.sincress.entitymap;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-<<<<<<< HEAD
-=======
 import android.widget.ImageView;
 import android.widget.TextView;
->>>>>>> d20df035cfbdde2a657c6f3682e34778683885e9
 
 import com.sincress.entitymap.Abstract.Entity;
+import com.sincress.entitymap.DataParser.*;
+import com.sincress.entitymap.Entities.Asteroid;
+import com.sincress.entitymap.Entities.ImgTextEntity;
 import com.sincress.entitymap.EntityCanvas.Connector;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class EntityManager {
@@ -62,6 +66,16 @@ public class EntityManager {
         //When Close is clicked on the fragment, canvas is brought to front and we obtain data
         ImageView image = (ImageView) fragmentview.findViewById(R.id.image);
         TextView textView = (TextView) fragmentview.findViewById(R.id.descText);
+
+        if(!((ImgTextEntity)entity).imageFile.equals("")) {
+            Bitmap bmp = BitmapFactory.decodeFile(((ImgTextEntity) entity).imageFile);
+            image.setImageBitmap(bmp);
+        }
+
+        if(entity.getType() == Entity.EntityType.ImgText)
+            textView.setText(((ImgTextEntity)entity).textContent);
+        //else
+          //  textView.setText(((Planet)entity).textContent);
     }
 
     public static View.OnTouchListener onTouchListener = new View.OnTouchListener() {
@@ -86,13 +100,17 @@ public class EntityManager {
                         new Point((int) (event.getX() + cameraX), (int) (event.getY() + cameraY)));
 
                 // Type = ImgTextEntity
-                if(clickedEntity.getType() == 0){
+                if(clickedEntity.getType() == Entity.EntityType.ImgText){
                     // Toggle the fragment and display the relevant data
                     entityCanvas.getActivity().toggleFragment(v, clickedEntity);
                 }
                 // Type = Asteroid
-                else if (clickedEntity.getType() == 1){
-                    //entities.add(DataParser.getData((Asteroid)clickedEntity.getID()));
+                else if (clickedEntity.getType() == Entity.EntityType.Asteroid){
+                    try {
+                        entities.add((new DataParser()).getData((Asteroid) clickedEntity.getID()));
+                    }catch(IOException e){
+                        Log.e("ParseData: ","File IO Error");
+                    }
                 }
                 // Type = Earth
                 else{
