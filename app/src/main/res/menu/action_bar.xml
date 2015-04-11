@@ -4,10 +4,20 @@
         android:id="@+id/action_zoomout"
         android:icon="@drawable/zoomout"
         android:title="Zoom out"
-        yourapp:showAsAction="ifRoom" />
+        yourapp:showAsAction="always" />
     <item
         android:id="@+id/action_zoomin"
         android:icon="@drawable/zoomin"
         android:title="Zoom in"
-        yourapp:showAsAction="ifRoom" />
+        yourapp:showAsAction="always" />
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/save"
+        android:title="Save"
+        yourapp:showAsAction="always" />
+    <item
+        android:id="@+id/action_load"
+        android:icon="@drawable/open"
+        android:title="Load"
+        yourapp:showAsAction="always" />
 </menu>

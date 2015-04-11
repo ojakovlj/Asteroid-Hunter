@@ -10,10 +10,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-
-import com.sincress.entitymap.Abstract.Entity;
 
 public class CanvasActivity extends ActionBarActivity{
 
@@ -31,6 +27,10 @@ public class CanvasActivity extends ActionBarActivity{
         setContentView(R.layout.activity_canvas);
 
         entityCanvas = (EntityCanvas) findViewById(R.id.canvas);
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.group, fragment, "Prompt");
+        transaction.remove(fragment);
+        transaction.commit();
     }
 
     /**
@@ -38,14 +38,13 @@ public class CanvasActivity extends ActionBarActivity{
      * adding new entities.
      * @param v view reference needed for XML onClick attribute
      */
-    public void toggleFragment(View v, Entity entity) {
+    public void toggleFragment(View v) {
         // Hide canvas, show prompt
         if (v == entityCanvas) {
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.group, fragment, "Prompt");
             transaction.commit();
-            // Obtain data from fragment
-            EntityManager.loadFragmentData(fragment.getView(), entityCanvas, entity);
+
             // Bring the fragment inside the group to front
             findViewById(R.id.group).bringToFront();
         } else { // Hide prompt, show canvas
@@ -54,8 +53,6 @@ public class CanvasActivity extends ActionBarActivity{
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.remove(fragment);
             transaction.commit();
-
-
         }
     }
 
@@ -88,6 +85,10 @@ public class CanvasActivity extends ActionBarActivity{
                 return true;
             case R.id.action_zoomout:
                 entityCanvas.setScale(false);
+                return true;
+            case R.id.action_load:
+                return true;
+            case R.id.action_save:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

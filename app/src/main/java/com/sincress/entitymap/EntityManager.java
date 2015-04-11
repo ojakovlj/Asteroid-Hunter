@@ -20,6 +20,7 @@ public class EntityManager {
 
     private static float clickX, clickY;
     public static EntityCanvas entityCanvas;
+    private static Entity clickedEntity;
 
     public static void saveEntities(ArrayList<Entity> array, String filename){
         // TODO : Add save function to file with custom format
@@ -42,8 +43,9 @@ public class EntityManager {
      * @param coordinate Coordinate to test
      * @return True if inside any entity, false otherwise
      */
-    public static Entity isInEntity(ArrayList<Entity> array, Point coordinate){
+    private static Entity isInEntity(ArrayList<Entity> array, Point coordinate){
         Point position, dimension;
+
         for(Entity entity: array){
             position = entity.getPosition();
             dimension = entity.getEntityDimens();
@@ -57,20 +59,19 @@ public class EntityManager {
     /**
      * Callback from fragment's OK button, handle the implementation here
      * @param fragmentview fragment's base view containing its elements.
-     * @param entityCanvas canvas which is related to the activity on which we do our drawing
      */
-    public static void loadFragmentData(View fragmentview, EntityCanvas entityCanvas, Entity entity){
+    public static void loadFragmentData(View fragmentview){
         //When Close is clicked on the fragment, canvas is brought to front and we obtain data
         ImageView image = (ImageView) fragmentview.findViewById(R.id.image);
         TextView textView = (TextView) fragmentview.findViewById(R.id.descText);
 
-        if(!((ImgTextEntity)entity).imageFile.equals("")) {
-            Bitmap bmp = BitmapFactory.decodeFile(((ImgTextEntity) entity).imageFile);
+        if(!((ImgTextEntity)clickedEntity).imageFile.equals("")) {
+            Bitmap bmp = BitmapFactory.decodeFile(((ImgTextEntity) clickedEntity).imageFile);
             image.setImageBitmap(bmp);
         }
 
-        if(entity.getType() == Entity.EntityType.ImgText)
-            textView.setText(((ImgTextEntity)entity).textContent);
+        if(clickedEntity.getType() == Entity.EntityType.ImgText)
+            textView.setText(((ImgTextEntity)clickedEntity).textContent);
         //else
         //  textView.setText(((Planet)entity).textContent);
     }
@@ -99,15 +100,15 @@ public class EntityManager {
             // ======================== ACTION UP ====================================
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 // Check if entity is clicked
-                Entity clickedEntity = EntityManager.isInEntity(entities,
-                        new Point((int) (event.getX() + cameraX), (int) (event.getY() + cameraY)));
+                clickedEntity = isInEntity(entities,
+                        new Point((int) (event.getX()/entityCanvas.ZOOM_LEVEL + cameraX), (int) (event.getY()/entityCanvas.ZOOM_LEVEL + cameraY)));
 
                 if(clickedEntity == null)
                     return true;
                 // Type = ImgTextEntity
                 if(clickedEntity.getType() == Entity.EntityType.ImgText){
                     // Toggle the fragment and display the relevant data
-                    entityCanvas.getActivity().toggleFragment(v, clickedEntity);
+                    entityCanvas.getActivity().toggleFragment(v);
                 }
                 // Type = Asteroid
                 else if (clickedEntity.getType() == Entity.EntityType.Asteroid){
@@ -116,7 +117,7 @@ public class EntityManager {
                 // Type = Earth
                 else{
                     // Toggle the fragment and display the relevant data
-                    entityCanvas.getActivity().toggleFragment(v, clickedEntity);
+                    entityCanvas.getActivity().toggleFragment(v);
                 }
             }
             // ======================== ACTION MOVE ====================================
