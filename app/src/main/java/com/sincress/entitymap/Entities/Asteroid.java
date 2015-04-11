@@ -6,6 +6,9 @@ import android.graphics.Paint;
 import android.graphics.Point;
 
 import com.sincress.entitymap.Abstract.Entity;
+import com.sincress.entitymap.CanvasActivity;
+import com.sincress.entitymap.EntityManager;
+import com.sincress.entitymap.R;
 
 public class Asteroid implements Entity{
     private int id;
@@ -16,19 +19,14 @@ public class Asteroid implements Entity{
     public Asteroid(int id, Point position) {
         this.id = id;
         this.position = position;
-    }
-
-    private Bitmap getBitmap() {
-        if (bitmap == null)
-            bitmap = BitmapFactory.decodeFile("drawable/asteroid" + id);
-        return bitmap;
+        bitmap = BitmapFactory.decodeResource(EntityManager.entityCanvas.getResources(), R.drawable.asteroid1);
     }
 
     @Override
     public void drawEntity(Canvas canvas) {
         Paint paint = new Paint();
 
-        canvas.drawBitmap(getBitmap(), (float)position.x, (float)position.y, paint);
+        canvas.drawBitmap(bitmap, (float)position.x, (float)position.y, paint);
     }
 
     @Override

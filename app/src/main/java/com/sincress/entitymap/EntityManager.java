@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class EntityManager {
 
     private static float clickX, clickY;
-    private static EntityCanvas entityCanvas;
+    public static EntityCanvas entityCanvas;
 
     public static void saveEntities(ArrayList<Entity> array, String filename){
         // TODO : Add save function to file with custom format
