@@ -195,10 +195,10 @@ public class EntityManager {
     private static void clampCameraPosition(float cameraX, float cameraY, MotionEvent event, View v) {
         int bottomBound = entityCanvas.H_AREA_SIZE  * entityCanvas.IMAGE_SIZE_Y - v.getHeight() ;
         int topBound = -entityCanvas.H_AREA_SIZE * entityCanvas.IMAGE_SIZE_Y;
-        int leftBound = entityCanvas.H_AREA_SIZE * entityCanvas.IMAGE_SIZE_X;
-        int rightBound = -entityCanvas.H_AREA_SIZE * entityCanvas.IMAGE_SIZE_X - v.getWidth();
-        double newCameraX = cameraX += (clickX - event.getX());
-        double newCameraY = cameraY += (clickY - event.getY());
+        int leftBound = -entityCanvas.H_AREA_SIZE * entityCanvas.IMAGE_SIZE_X;
+        int rightBound = entityCanvas.H_AREA_SIZE * entityCanvas.IMAGE_SIZE_X - v.getWidth();
+        double newCameraX = cameraX + (clickX - event.getX());
+        double newCameraY = cameraY + (clickY - event.getY());
         if(!(newCameraX > rightBound || newCameraX < leftBound))
             cameraX += (clickX - event.getX());
         if(!(newCameraY > bottomBound || newCameraY < topBound))
