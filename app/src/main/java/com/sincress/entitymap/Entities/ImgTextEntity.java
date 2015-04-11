@@ -11,8 +11,8 @@ import java.util.Date;
 
 public class ImgTextEntity implements Entity {
 
-    private String boxTitle, imageFile, textContent;
-    private int X, Y;
+    public String boxTitle, imageFile, textContent;
+    public int X, Y;
     private final int BOX_HEIGHT = 40;
 
 

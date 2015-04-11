@@ -1,4 +1,4 @@
-package com.sincress.entitymap;
+package com.sincress.entitymap.DataParser;
 
 
 import android.graphics.Point;
@@ -10,17 +10,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-
-public class Asteroid {
+public class AsteroidData {
 	
 	HashMap<Integer, ArrayList<String>> map;
 	//ArrayList<String> data ;
 	BufferedReader reader;
 	int counter;
 	
-	public Asteroid(String dat) throws IOException{
+	public AsteroidData(String dat) throws IOException{
 		counter=1;
 		String line;
 		reader = new BufferedReader(new FileReader("drawable/" + dat));
