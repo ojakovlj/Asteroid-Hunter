@@ -1,19 +1,17 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+package com.sincress.entitymap.DataParser;
 
-import org.json.JSONException;
+import com.sincress.entitymap.Entities.ImgTextEntity;
+import java.io.IOException;
 
 
 public class DataParser {
-	Asteroid a1, a2, a3, a4;
+	AsteroidData a1, a2, a3, a4;
 	
-	public DataParser() throws IOException, JSONException{
-		a1 = new Asteroid("asteroid1.json");
-		a2 = new Asteroid("asteroid2.json");
-		a3 = new Asteroid("asteroid3.json");
-		a4 = new Asteroid("asteroid4.json");
-
+	public DataParser() throws IOException {
+		a1 = new AsteroidData("asteroid1.data");
+		a2 = new AsteroidData("asteroid2.data");
+		a3 = new AsteroidData("asteroid3.data");
+		a4 = new AsteroidData("asteroid4.data");
 
 	}
 	
