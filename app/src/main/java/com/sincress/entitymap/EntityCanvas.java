@@ -1,11 +1,12 @@
 package com.sincress.entitymap;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -17,6 +18,9 @@ public class EntityCanvas extends View {
     private ArrayList<Entity> entities;
     private ArrayList<Connector> connectors;
     private CanvasActivity activity;
+    private Bitmap background;
+    public final int H_AREA_SIZE = 5;
+    public int IMAGE_SIZE_X, IMAGE_SIZE_Y;
 
     public EntityCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -25,6 +29,11 @@ public class EntityCanvas extends View {
         activity = (CanvasActivity)context;
         // Set the instance of the entity canvas needed in the onTouch method
         EntityManager.setCanvasInstance(this);
+        background = BitmapFactory.decodeResource(getResources(), R.drawable.spacebackground);
+        IMAGE_SIZE_X = background.getWidth();
+        IMAGE_SIZE_Y = background.getHeight();
+        //background = Bitmap.createScaledBitmap(background, screenW / 8, screenH / 8, false);
+
         // Set the onClick listeners defined in EntityManager
         this.setOnTouchListener(EntityManager.onTouchListener);
     }
@@ -56,6 +65,10 @@ public class EntityCanvas extends View {
         super.onDraw(canvas);
 
         canvas.translate(-cameraX, -cameraY);
+        // Draw our background, tiled
+        for(int j=-H_AREA_SIZE; j<H_AREA_SIZE; j++)
+            for(int i=-H_AREA_SIZE; i<H_AREA_SIZE; i++)
+                canvas.drawBitmap(background, IMAGE_SIZE_X*i, IMAGE_SIZE_Y*j, new Paint());
         // Draw all connectors
         for (Connector line: connectors)
             line.drawConnector(canvas);
@@ -82,7 +95,6 @@ public class EntityCanvas extends View {
             paint.setStrokeWidth(3);
             float hEntityHeight = end.getEntityDimens().y / 2;
             float hEntity1Width = start.getEntityDimens().x / 2, hEntity2Width = end.getEntityDimens().x / 2 ;
-
             canvas.drawLine(start.getPosition().x + hEntity1Width, start.getPosition().y + hEntityHeight,
                     end.getPosition().x + hEntity2Width, end.getPosition().y + hEntityHeight, paint);
             /*float arrowX = end.getPosition().x > start.getPosition().x ? (end.getPosition().x+start.getPosition().x) /2:
