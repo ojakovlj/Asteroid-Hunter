@@ -133,10 +133,7 @@ public class EntityManager {
                /* clampCameraPosition(cameraX, cameraY, event, v);
                 clickX = event.getX();
                 clickY = event.getY();*/
-                cameraX += (clickX - event.getX());
-                cameraY += (clickY - event.getY());
-                entityCanvas.setCameraCoords(cameraX, cameraY);
-                entityCanvas.postInvalidate();
+                clampCameraPosition(cameraX, cameraY, event, v, entityCanvas.getScale());
                 clickX = event.getX();
                 clickY = event.getY();
             }
@@ -144,11 +141,11 @@ public class EntityManager {
         }
     };
 
-    private static void clampCameraPosition(float cameraX, float cameraY, MotionEvent event, View v) {
-        int bottomBound = entityCanvas.H_AREA_SIZE  * entityCanvas.IMAGE_SIZE_Y - v.getHeight() ;
+    private static void clampCameraPosition(float cameraX, float cameraY, MotionEvent event, View v, float zoomLevel) {
+        int bottomBound = entityCanvas.H_AREA_SIZE  * entityCanvas.IMAGE_SIZE_Y - (int)(v.getHeight()/zoomLevel);
         int topBound = -entityCanvas.H_AREA_SIZE * entityCanvas.IMAGE_SIZE_Y;
         int leftBound = -entityCanvas.H_AREA_SIZE * entityCanvas.IMAGE_SIZE_X;
-        int rightBound = entityCanvas.H_AREA_SIZE * entityCanvas.IMAGE_SIZE_X - v.getWidth();
+        int rightBound = entityCanvas.H_AREA_SIZE * entityCanvas.IMAGE_SIZE_X - (int)(v.getWidth()/zoomLevel);
         double newCameraX = cameraX + (clickX - event.getX());
         double newCameraY = cameraY + (clickY - event.getY());
         if(!(newCameraX > rightBound || newCameraX < leftBound))

@@ -23,6 +23,7 @@ public class EntityCanvas extends View {
     private Bitmap background;
     public final int H_AREA_SIZE = 5;
     public int IMAGE_SIZE_X, IMAGE_SIZE_Y;
+    public float ZOOM_LEVEL = 1.0f;
 
     public EntityCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -67,10 +68,34 @@ public class EntityCanvas extends View {
         return activity;
     }
 
+    public void setScale(boolean zoomin){
+        if(zoomin) {
+            if (ZOOM_LEVEL < 1.5f)
+                ZOOM_LEVEL += 0.5f;
+        }
+        else {
+            if (ZOOM_LEVEL > 0.5)
+                ZOOM_LEVEL -= 0.5f;
+        }
+        //Call clamp camera position if the user unzooms while facing a lower/right boundary
+        int bottomBound = H_AREA_SIZE  * IMAGE_SIZE_Y - (int)(this.getHeight()/ZOOM_LEVEL);
+        int rightBound = H_AREA_SIZE * IMAGE_SIZE_X - (int)(this.getWidth()/ZOOM_LEVEL);
+        if(cameraX + (int)(this.getWidth()/ZOOM_LEVEL) > rightBound)
+            cameraX -= 0.75*(this.getHeight()/ZOOM_LEVEL);
+        if(cameraY + (int)(this.getHeight()/ZOOM_LEVEL) > bottomBound)
+            cameraY -= 0.75*(this.getHeight()/ZOOM_LEVEL);
+        postInvalidate();
+    }
+
+    public float getScale(){
+        return ZOOM_LEVEL;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        canvas.scale(ZOOM_LEVEL, ZOOM_LEVEL);
         canvas.translate(-cameraX, -cameraY);
         // Draw our background, tiled
         for(int j=-H_AREA_SIZE; j<H_AREA_SIZE; j++)

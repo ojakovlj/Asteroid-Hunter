@@ -1,10 +1,17 @@
 package com.sincress.entitymap;
 
+import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.sincress.entitymap.Abstract.Entity;
 
@@ -62,6 +69,29 @@ public class CanvasActivity extends ActionBarActivity{
         transaction.commit();
         // Bring the canvas to top
         findViewById(R.id.canvas).bringToFront();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_bar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_zoomin:
+                entityCanvas.setScale(true);
+                return true;
+            case R.id.action_zoomout:
+                entityCanvas.setScale(false);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

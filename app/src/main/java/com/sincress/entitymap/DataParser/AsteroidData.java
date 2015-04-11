@@ -21,7 +21,7 @@ public class AsteroidData {
 	public AsteroidData(String dat) throws IOException{
 		counter=1;
 		String line;
-		reader = new BufferedReader(new FileReader("assets/" + dat));
+		reader = new BufferedReader(new FileReader("assets\\" + dat));
 		map = new HashMap<>();
 		
 		//data[0] == title

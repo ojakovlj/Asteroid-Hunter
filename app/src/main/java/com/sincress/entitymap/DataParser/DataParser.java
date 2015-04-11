@@ -9,9 +9,9 @@ public class DataParser {
 	
 	public DataParser() throws IOException {
 		a1 = new AsteroidData("asteroid1.data");
-		a2 = new AsteroidData("asteroid2.data");
+		/*a2 = new AsteroidData("asteroid2.data");
 		a3 = new AsteroidData("asteroid3.data");
-		a4 = new AsteroidData("asteroid4.data");
+		a4 = new AsteroidData("asteroid4.data");*/
 
 	}
 	
