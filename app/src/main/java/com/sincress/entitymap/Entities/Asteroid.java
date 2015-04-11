@@ -52,4 +52,9 @@ public class Asteroid implements Entity{
     public Point getPosition() {
         return this.position;
     }
+
+    @Override
+    public EntityType getType() {
+        return EntityType.Asteroid;
+    }
 }

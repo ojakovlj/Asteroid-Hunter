@@ -5,9 +5,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
+import com.sincress.entitymap.Abstract.Entity;
+
 import java.util.Date;
 
-public class ImgTextEntity implements Entity{
+public class ImgTextEntity implements Entity {
 
     private String boxTitle, imageFile, textContent;
     private int X, Y;
@@ -69,8 +71,8 @@ public class ImgTextEntity implements Entity{
     }
 
     @Override
-    public int getType() {
-        return 0;
+    public EntityType getType() {
+        return EntityType.ImgText;
     }
 
     @Override
