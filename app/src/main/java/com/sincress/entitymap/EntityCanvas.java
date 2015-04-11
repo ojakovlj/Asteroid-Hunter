@@ -9,6 +9,8 @@ import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.sincress.entitymap.Abstract.Entity;
+
 import java.util.ArrayList;
 
 public class EntityCanvas extends View {

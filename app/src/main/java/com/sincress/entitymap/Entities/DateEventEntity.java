@@ -1,13 +1,13 @@
-package com.sincress.entitymap;
+package com.sincress.entitymap.Entities;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-import java.util.Date;
+import com.sincress.entitymap.Abstract.Entity;
 
-public class DateEventEntity implements Entity{
+public class DateEventEntity implements Entity {
 
     private String date;
     private String description;

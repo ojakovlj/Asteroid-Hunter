@@ -7,6 +7,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.sincress.entitymap.Abstract.Entity;
+import com.sincress.entitymap.Entities.DateEventEntity;
 import com.sincress.entitymap.EntityCanvas.Connector;
 
 import java.util.ArrayList;

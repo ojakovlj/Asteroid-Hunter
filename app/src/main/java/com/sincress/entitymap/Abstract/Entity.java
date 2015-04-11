@@ -1,4 +1,4 @@
-package com.sincress.entitymap;
+package com.sincress.entitymap.Abstract;
 
 
 import android.graphics.Canvas;
