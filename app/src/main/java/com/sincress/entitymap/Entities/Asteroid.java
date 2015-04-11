@@ -8,17 +8,20 @@ import android.graphics.Point;
 import com.sincress.entitymap.Abstract.Entity;
 
 public class Asteroid implements Entity{
-    private String id;
+    private int id;
     private Point position;
     private boolean isSelected;
+    private Bitmap bitmap;
 
-    public Asteroid(String id, Point position) {
+    public Asteroid(int id, Point position) {
         this.id = id;
         this.position = position;
     }
 
     private Bitmap getBitmap() {
-        return null;
+        if (bitmap == null)
+            bitmap = BitmapFactory.decodeFile("drawable/asteroid" + id);
+        return bitmap;
     }
 
     @Override
@@ -30,7 +33,12 @@ public class Asteroid implements Entity{
 
     @Override
     public Point getEntityDimens() {
-        return null;
+        switch (id) {
+            case 1:
+                return new Point(220, 223);
+            default:
+                return new Point(100, 100);
+        }
     }
 
     @Override
@@ -56,5 +64,10 @@ public class Asteroid implements Entity{
     @Override
     public EntityType getType() {
         return EntityType.Asteroid;
+    }
+
+    public int GetId()
+    {
+        return id;
     }
 }
