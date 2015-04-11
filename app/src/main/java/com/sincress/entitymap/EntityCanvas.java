@@ -34,6 +34,7 @@ public class EntityCanvas extends View {
         background = BitmapFactory.decodeResource(getResources(), R.drawable.spacebackground);
         IMAGE_SIZE_X = background.getWidth();
         IMAGE_SIZE_Y = background.getHeight();
+        EntityManager.initialise();
         //background = Bitmap.createScaledBitmap(background, screenW / 8, screenH / 8, false);
 
         // Set the onClick listeners defined in EntityManager
@@ -52,6 +53,10 @@ public class EntityCanvas extends View {
 
     public ArrayList<Entity> getEntities() {
         return entities;
+    }
+
+    public void addEntity(Entity ent){
+        entities.add(ent);
     }
 
     public ArrayList<Connector> getConnectors() {
@@ -75,8 +80,8 @@ public class EntityCanvas extends View {
         for (Connector line: connectors)
             line.drawConnector(canvas);
         // Draw all entities drawn to map
-        for (Entity pair : entities)
-            pair.drawEntity(canvas);
+        for (Entity entity : entities)
+            entity.drawEntity(canvas);
         canvas.translate(cameraX, cameraY);
     }
 

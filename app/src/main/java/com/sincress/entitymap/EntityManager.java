@@ -107,7 +107,8 @@ public class EntityManager {
                 // Type = Asteroid
                 else if (clickedEntity.getType() == Entity.EntityType.Asteroid){
                     try {
-                        entities.add((new DataParser()).getData((Asteroid) clickedEntity.getID()));
+                        DataParser parser = new DataParser();
+                        entities.add(parser.getData(((Asteroid) clickedEntity).GetId()));
                     }catch(IOException e){
                         Log.e("ParseData: ","File IO Error");
                     }
@@ -144,4 +145,8 @@ public class EntityManager {
         entityCanvas.postInvalidate();
     }
 
+    public static void initialise() {
+        Asteroid ast1 = new Asteroid(1, new Point(200, 100));
+        entityCanvas.addEntity(ast1);
+    }
 }

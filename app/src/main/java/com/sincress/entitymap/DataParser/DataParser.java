@@ -8,10 +8,10 @@ public class DataParser {
 	AsteroidData a1, a2, a3, a4;
 	
 	public DataParser() throws IOException {
-		a1 = new AsteroidData("asteroid1.txt");
-		a2 = new AsteroidData("asteroid2.txt");
-		a3 = new AsteroidData("asteroid3.txt");
-		a4 = new AsteroidData("asteroid4.txt");
+		a1 = new AsteroidData("asteroid1.data");
+		a2 = new AsteroidData("asteroid2.data");
+		a3 = new AsteroidData("asteroid3.data");
+		a4 = new AsteroidData("asteroid4.data");
 
 	}
 	

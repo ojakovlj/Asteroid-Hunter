@@ -21,7 +21,7 @@ public class AsteroidData {
 	public AsteroidData(String dat) throws IOException{
 		counter=1;
 		String line;
-		reader = new BufferedReader(new FileReader("drawable/" + dat));
+		reader = new BufferedReader(new FileReader("assets/" + dat));
 		map = new HashMap<>();
 		
 		//data[0] == title
@@ -34,7 +34,7 @@ public class AsteroidData {
 		
 		while((line = reader.readLine()) != null){
 			
-			if(line.startsWith("@") || line.startsWith("&") || line.startsWith("!")){
+			if(line.startsWith("*") || line.startsWith("&") || line.startsWith("!")){
 				line=line.substring(1);
 				data.add(line);
 			}
