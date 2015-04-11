@@ -94,11 +94,13 @@ public class EntityManager {
             ArrayList<Entity> entities = entityCanvas.getEntities();
             ArrayList<Connector> connectors = entityCanvas.getConnectors();
             // ======================== ACTION UP ====================================
-            if (event.getAction() == MotionEvent.ACTION_UP) {
+           /* if (event.getAction() == MotionEvent.ACTION_UP) {
                 // Check if entity is clicked
                 Entity clickedEntity = EntityManager.isInEntity(entities,
                         new Point((int) (event.getX() + cameraX), (int) (event.getY() + cameraY)));
 
+                if(clickedEntity == null)
+                    return true;
                 // Type = ImgTextEntity
                 if(clickedEntity.getType() == Entity.EntityType.ImgText){
                     // Toggle the fragment and display the relevant data
@@ -118,7 +120,7 @@ public class EntityManager {
                     // Toggle the fragment and display the relevant data
                     entityCanvas.getActivity().toggleFragment(v, clickedEntity);
                 }
-            }
+            }*/
             // ======================== ACTION MOVE ====================================
             if (event.getAction() == MotionEvent.ACTION_MOVE) {
                 // Move the canvas
@@ -126,7 +128,7 @@ public class EntityManager {
                 clickX = event.getX();
                 clickY = event.getY();
             }
-            return false;
+            return true;
         }
     };
 
