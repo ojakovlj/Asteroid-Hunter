@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"  tools:context=".CanvasActivity">
+
+
+    <FrameLayout
+        android:id="@+id/group"
+        android:padding="50dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false">
+
+    </FrameLayout>
+
+    <view
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="com.sincress.entitymap.EntityCanvas"
+        android:id="@+id/canvas"
+        android:layout_gravity="center" />
+
+
+</RelativeLayout>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">EntityMap</string>
+
+    <string-array name="entries">
+        <item>Red</item>
+        <item>Yellow</item>
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Cyan</item>
+        <item>Gray</item>
+        <item>Magenta</item>
+    </string-array>
+
+    <string name="okbutton">Ok</string>
+    <string name="cancelbutton">Cancel</string>
+    <string name="dateText">Date</string>
+    <string name="descTect">Description</string>
+
+</resources>
