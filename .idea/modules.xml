@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Asteroid-Hunter.iml" filepath="$PROJECT_DIR$/Asteroid-Hunter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EntityMap.iml" filepath="$PROJECT_DIR$/EntityMap.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
