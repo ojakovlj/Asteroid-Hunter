@@ -75,7 +75,7 @@ public class EntityManager {
         if(entity.getType() == Entity.EntityType.ImgText)
             textView.setText(((ImgTextEntity)entity).textContent);
         //else
-          //  textView.setText(((Planet)entity).textContent);
+        //  textView.setText(((Planet)entity).textContent);
     }
 
     public static View.OnTouchListener onTouchListener = new View.OnTouchListener() {
@@ -93,8 +93,14 @@ public class EntityManager {
             float cameraY = entityCanvas.getCameraCoords().y;
             ArrayList<Entity> entities = entityCanvas.getEntities();
             ArrayList<Connector> connectors = entityCanvas.getConnectors();
+            // ======================== ACTION DOWN ====================================
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                // Mark position for use in ACTION MOVE
+                clickX = event.getX();
+                clickY = event.getY();
+            }
             // ======================== ACTION UP ====================================
-           /* if (event.getAction() == MotionEvent.ACTION_UP) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
                 // Check if entity is clicked
                 Entity clickedEntity = EntityManager.isInEntity(entities,
                         new Point((int) (event.getX() + cameraX), (int) (event.getY() + cameraY)));
@@ -120,11 +126,17 @@ public class EntityManager {
                     // Toggle the fragment and display the relevant data
                     entityCanvas.getActivity().toggleFragment(v, clickedEntity);
                 }
-            }*/
+            }
             // ======================== ACTION MOVE ====================================
             if (event.getAction() == MotionEvent.ACTION_MOVE) {
                 // Move the canvas
-                clampCameraPosition(cameraX, cameraY, event, v);
+               /* clampCameraPosition(cameraX, cameraY, event, v);
+                clickX = event.getX();
+                clickY = event.getY();*/
+                cameraX += (clickX - event.getX());
+                cameraY += (clickY - event.getY());
+                entityCanvas.setCameraCoords(cameraX, cameraY);
+                entityCanvas.postInvalidate();
                 clickX = event.getX();
                 clickY = event.getY();
             }
