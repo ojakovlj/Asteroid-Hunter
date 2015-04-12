@@ -56,21 +56,22 @@ public class ImgTextEntity implements Entity, Serializable {
     public void drawEntity(Canvas canvas) {
         Paint paint = new Paint();
         int boxWidth = calculateBoxSize();
+        Point position = getPosition();
 
         paint.setColor(Color.BLACK);
         paint.setAlpha((int)(255 * getAlpha()));
         // Black outer box
-        canvas.drawRect(X, Y, X + boxWidth, Y + BOX_HEIGHT, paint);
+        canvas.drawRect(position.x, position.y, position.x + boxWidth, position.y + BOX_HEIGHT, paint);
 
         paint.setColor(Color.GRAY);
         paint.setAlpha((int)(255 * getAlpha()));
         // Gray inner box
-        canvas.drawRect(X+5, Y+5, X + boxWidth - 5, Y + BOX_HEIGHT-5, paint);
+        canvas.drawRect(position.x+5, position.y+5, position.x + boxWidth - 5, position.y + BOX_HEIGHT-5, paint);
 
         // Text
         paint.setColor(Color.BLACK);
         paint.setAlpha((int)(255 * getAlpha()));
-        canvas.drawText(boxTitle, X + 7, Y + BOX_HEIGHT - 15, paint);
+        canvas.drawText(boxTitle, position.x + 7, position.y + BOX_HEIGHT - 15, paint);
     }
 
     @Override

@@ -214,8 +214,10 @@ public class EntityManager {
 
     public static ArrayList<Entity> getDefaultEntities() {
         ArrayList<Entity> entities = new ArrayList<>();
-        Asteroid ast1 = new Asteroid(1, new Point(200, 100));
-        entities.add(ast1);
+        entities.add(new Asteroid(1, new Point(200, 100)));
+        entities.add(new Asteroid(2, new Point(-300, -300)));
+        entities.add(new Asteroid(3, new Point(0, -500)));
+
         Planet earth = new Planet("", "Welcome to planet Earth!",
                 new Point(2091-entityCanvas.IMAGE_SIZE_X*entityCanvas.H_AREA_SIZE,
                         1465-entityCanvas.IMAGE_SIZE_Y*entityCanvas.H_AREA_SIZE));
