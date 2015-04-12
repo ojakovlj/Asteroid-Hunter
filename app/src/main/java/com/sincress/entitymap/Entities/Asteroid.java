@@ -165,14 +165,14 @@ public class Asteroid implements Entity, Serializable {
 
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.writeInt(this.id);
-        out.writeObject(this.position);
-        out.writeObject(this.json);
+        out.writeInt(this.position.x);
+        out.writeInt(this.position.y);
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         this.id = in.readInt();
-        this.position = (Point) in.readObject();
-        this.json = (JSONObject) in.readObject();
+        this.position = new Point(in.readInt(), in.readInt());
+        this.json = readJson();
         int resource;
         switch (this.id) {
             case 1:

@@ -89,6 +89,8 @@ public class CanvasActivity extends ActionBarActivity{
                 entityCanvas.setScale(false);
                 return true;
             case R.id.action_clear:
+                EntityManager.saveEntities(entityCanvas.getEntities(), "entities");
+                entityCanvas.setEntities(EntityManager.loadEntities("entities"));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

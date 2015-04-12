@@ -10,6 +10,9 @@ import com.sincress.entitymap.Abstract.Entity;
 import com.sincress.entitymap.EntityManager;
 import com.sincress.entitymap.R;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Planet implements Entity, Serializable {
@@ -60,5 +63,19 @@ public class Planet implements Entity, Serializable {
     @Override
     public EntityType getType() {
         return EntityType.Planet;
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.writeObject(imageFile);
+        out.writeObject(textContent);
+        out.writeInt(position.x);
+        out.writeInt(position.y);
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        this.imageFile = (String) in.readObject();
+        this.textContent = (String) in.readObject();
+        this.position = new Point(in.readInt(), in.readInt());
+        this.bitmap = BitmapFactory.decodeResource(EntityManager.entityCanvas.getResources(), R.drawable.earth);
     }
 }
