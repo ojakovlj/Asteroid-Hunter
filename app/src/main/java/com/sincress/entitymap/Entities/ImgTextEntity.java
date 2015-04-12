@@ -1,24 +1,28 @@
 package com.sincress.entitymap.Entities;
 
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
 import com.sincress.entitymap.Abstract.Entity;
+import com.sincress.entitymap.EntityCanvas;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Date;
 
 public class ImgTextEntity implements Entity, Serializable {
 
+    private float alpha;
     public String boxTitle, imageFile, textContent;
     public int X, Y;
     private final int BOX_HEIGHT = 40;
-
+    private ObjectAnimator fadeIn;
 
     public ImgTextEntity(String title, String img, String text, Point pos){
         boxTitle = title;
@@ -26,23 +30,35 @@ public class ImgTextEntity implements Entity, Serializable {
         textContent = text;
         X = pos.x;
         Y = pos.y;
+        setAlpha(1f);
+        fadeIn = ObjectAnimator.ofFloat(this, "alpha", 0f, 1f);
+        fadeIn.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                EntityCanvas.instance.postInvalidate();
+            }
+        });
+        fadeIn.start();
     }
 
-    @Override
+        @Override
     public void drawEntity(Canvas canvas) {
         Paint paint = new Paint();
         int boxWidth = calculateBoxSize();
 
         paint.setColor(Color.BLACK);
+        paint.setAlpha((int)(255 * getAlpha()));
         // Black outer box
         canvas.drawRect(X, Y, X + boxWidth, Y + BOX_HEIGHT, paint);
 
         paint.setColor(Color.GRAY);
+        paint.setAlpha((int)(255 * getAlpha()));
         // Gray inner box
         canvas.drawRect(X+5, Y+5, X + boxWidth - 5, Y + BOX_HEIGHT-5, paint);
 
         // Text
         paint.setColor(Color.BLACK);
+        paint.setAlpha((int)(255 * getAlpha()));
         canvas.drawText(boxTitle, X + 7, Y + BOX_HEIGHT - 15, paint);
     }
 
@@ -98,5 +114,13 @@ public class ImgTextEntity implements Entity, Serializable {
         textContent = (String) in.readObject();
         X = in.readInt();
         Y = in.readInt();
+    }
+
+    public float getAlpha() {
+        return alpha;
+    }
+
+    public void setAlpha(float alpha) {
+        this.alpha = alpha;
     }
 }

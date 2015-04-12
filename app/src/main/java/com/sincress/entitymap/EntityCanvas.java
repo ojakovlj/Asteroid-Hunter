@@ -14,7 +14,7 @@ import com.sincress.entitymap.Abstract.Entity;
 import java.util.ArrayList;
 
 public class EntityCanvas extends View {
-
+    public static EntityCanvas instance;
     private float cameraX = 0, cameraY = 0;
     //private Canvas canvas;
     private ArrayList<Entity> entities;
@@ -32,6 +32,7 @@ public class EntityCanvas extends View {
         activity = (CanvasActivity)context;
         // Set the instance of the entity canvas needed in the onTouch method
         EntityManager.setCanvasInstance(this);
+        instance = this;
         background = BitmapFactory.decodeResource(getResources(), R.drawable.spacebackground);
         IMAGE_SIZE_X = background.getWidth();
         IMAGE_SIZE_Y = background.getHeight();
