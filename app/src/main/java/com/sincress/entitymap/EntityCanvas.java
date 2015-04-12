@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
@@ -20,10 +21,16 @@ public class EntityCanvas extends View {
     private ArrayList<Entity> entities;
     private ArrayList<Connector> connectors;
     private CanvasActivity activity;
-    private Bitmap background;
+    private Bitmap background, spaceship, trailBmp;
+    public float shipHeading = 0;
     public final int H_AREA_SIZE = 5;
     public int IMAGE_SIZE_X, IMAGE_SIZE_Y;
     public float ZOOM_LEVEL = 1.0f;
+
+    private int[] splash_alphas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private int[] splash_xcoords = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private int[] splash_ycoords = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public float shipX = 0, shipY = 0;
 
     public EntityCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -34,6 +41,7 @@ public class EntityCanvas extends View {
         EntityManager.setCanvasInstance(this);
         instance = this;
         background = BitmapFactory.decodeResource(getResources(), R.drawable.spacebackground);
+        trailBmp = BitmapFactory.decodeResource(getResources(), R.drawable.splash);
         IMAGE_SIZE_X = background.getWidth();
         IMAGE_SIZE_Y = background.getHeight();
         EntityManager.initialise();
@@ -41,6 +49,29 @@ public class EntityCanvas extends View {
 
         // Set the onClick listeners defined in EntityManager
         this.setOnTouchListener(EntityManager.onTouchListener);
+
+        new Thread(new Runnable() {
+            public void run() {
+                while (true) { //otherwise thread will run only once
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    for (int i = 0; i < 20; i++) {
+                        try {
+                            Thread.sleep(100); //100 ms sleep to update the ship splashes
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        splash_xcoords[i] = (int) (shipX + getWidth() / 2 /ZOOM_LEVEL);
+                        splash_ycoords[i] = (int) (shipY + getHeight() / 2 / ZOOM_LEVEL);
+                        splash_alphas[i] = 255;
+                    }
+                }
+            }
+        }).start();
     }
 
 
@@ -112,9 +143,31 @@ public class EntityCanvas extends View {
         // Draw all entities drawn to map
         for (Entity entity : entities)
             entity.drawEntity(canvas);
+        drawTrail(canvas);
         canvas.translate(cameraX, cameraY);
+
+        Matrix mtx = new Matrix();
+        spaceship = BitmapFactory.decodeResource(getResources(), R.drawable.spaceship);
+        mtx.setRotate((float)(shipHeading*180/Math.PI), 0, 0);   // rotating 180 degrees clockwise
+        mtx.postScale(0.5f, 0.5f, spaceship.getWidth() / 4, spaceship.getHeight() / 4); //default scale
+        spaceship = Bitmap.createBitmap(spaceship, 0, 0, spaceship.getWidth(), spaceship.getHeight(), mtx, true);
+        float spaceshipX = this.getWidth()/2/ZOOM_LEVEL-spaceship.getWidth()/2;
+        float spaceshipY = this.getHeight()/2/ZOOM_LEVEL-spaceship.getHeight()/2;
+        canvas.drawBitmap(spaceship, spaceshipX, spaceshipY, new Paint());
     }
 
+    public void drawTrail(Canvas canvas) {
+        //WATER SPLASH DRAWING
+        ArrayList<Bitmap> splashes = new ArrayList<Bitmap>();
+        Paint paint = new Paint();
+
+        for (int i = 0; i < 20; i++) {
+            splashes.add(trailBmp);
+            paint.setAlpha(splash_alphas[i]);
+            if (splash_alphas[i] > 3) splash_alphas[i] -= 2;
+            canvas.drawBitmap(splashes.get(i), splash_xcoords[i] - splashes.get(i).getWidth() / 2, splash_ycoords[i] - splashes.get(i).getWidth() / 2, paint);
+        }
+    }
     /**
      * Class describring a connector line, with its startpoint and endpoint defined.
      */

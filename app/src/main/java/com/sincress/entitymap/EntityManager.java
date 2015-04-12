@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class EntityManager {
 
-    private static float clickX, clickY;
+    private static float clickX, clickY, oldClickX, oldClickY;
     public static EntityCanvas entityCanvas;
     private static Entity clickedEntity;
 
@@ -140,8 +140,9 @@ public class EntityManager {
             // ======================== ACTION DOWN ====================================
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 // Mark position for use in ACTION MOVE
-                clickX = event.getX();
-                clickY = event.getY();
+                oldClickX = clickX = event.getX();
+                oldClickY = clickY = event.getY();
+
             }
             // ======================== ACTION UP ====================================
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -174,6 +175,9 @@ public class EntityManager {
                /* clampCameraPosition(cameraX, cameraY, event, v);
                 clickX = event.getX();
                 clickY = event.getY();*/
+                entityCanvas.shipHeading = (float) Math.atan2((oldClickY - event.getY()),(oldClickX - event.getX()));
+                entityCanvas.shipX = cameraX;// + entityCanvas.getWidth()/2;
+                entityCanvas.shipY = cameraY;// + entityCanvas.getHeight()/2;
                 clampCameraPosition(cameraX, cameraY, event, v, entityCanvas.getScale());
                 clickX = event.getX();
                 clickY = event.getY();
@@ -181,6 +185,7 @@ public class EntityManager {
             return true;
         }
     };
+
 
     private static void clampCameraPosition(float cameraX, float cameraY, MotionEvent event, View v, float zoomLevel) {
         int bottomBound = entityCanvas.H_AREA_SIZE  * entityCanvas.IMAGE_SIZE_Y - (int)(v.getHeight()/zoomLevel);
