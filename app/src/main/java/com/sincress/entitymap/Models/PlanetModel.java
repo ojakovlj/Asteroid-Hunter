@@ -2,6 +2,8 @@ package com.sincress.entitymap.Models;
 
 import android.graphics.Point;
 
+import com.sincress.entitymap.Entities.Planet;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 public class PlanetModel {
     public ArrayList<InfoBoxModel> infoboxes = new ArrayList<>();
 
-    public PlanetModel(JSONObject json) {
+    public PlanetModel(JSONObject json, Planet parent) {
         try {
             JSONArray cards = json.getJSONArray("cards");
             for(int i = 0; i<cards.length(); i++){
@@ -21,7 +23,8 @@ public class PlanetModel {
                         card.getString("name"),
                         card.getString("image"),
                         card.getString("text"),
-                        new Point(coordinates.getInt("x"), coordinates.getInt("y"))
+                        new Point(coordinates.getInt("x"), coordinates.getInt("y")),
+                        parent
                 );
                 infoboxes.add(infobox);
             }

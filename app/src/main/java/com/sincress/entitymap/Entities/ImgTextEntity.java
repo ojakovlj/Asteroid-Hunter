@@ -26,8 +26,8 @@ public class ImgTextEntity implements Entity, Serializable {
     private ObjectAnimator fadeIn;
     private InfoBoxModel model;
 
-    public ImgTextEntity(String title, String img, String text, Point pos) {
-        this(new InfoBoxModel(title, img, text, pos));
+    public ImgTextEntity(String title, String img, String text, Point pos, Entity parent) {
+        this(new InfoBoxModel(title, img, text, pos, parent));
     }
     public ImgTextEntity(InfoBoxModel model) {
         this.model = model;
@@ -98,7 +98,7 @@ public class ImgTextEntity implements Entity, Serializable {
 
     @Override
     public Point getPosition() {
-        return new Point(X,Y);
+        return new Point(model.position.x + model.offset.x, model.position.y + model.offset.y);
     }
 
     @Override

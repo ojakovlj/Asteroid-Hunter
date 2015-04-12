@@ -204,11 +204,12 @@ public class EntityManager {
     }
 
     public static void initialise() {
-        ArrayList<Entity> entities = loadEntities("entities");
-        if (entities.isEmpty()) {
-            entities = getDefaultEntities();
-        }
-        entityCanvas.setEntities(entities);
+//        ArrayList<Entity> entities = loadEntities("entities");
+//        if (entities.isEmpty()) {
+//            entities = getDefaultEntities();
+//        }
+//        entityCanvas.setEntities(entities);
+          entityCanvas.setEntities(getDefaultEntities());
     }
 
     public static ArrayList<Entity> getDefaultEntities() {

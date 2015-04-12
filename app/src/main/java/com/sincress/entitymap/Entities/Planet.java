@@ -32,10 +32,8 @@ public class Planet implements Entity, Serializable {
         this.resourceId = R.raw.zemlja;
         this.textContent = text;
         this.position = pos;
-
-        this.model = new PlanetModel(JSONReader.getJSONObject(resourceId));
-
-        bitmap = BitmapFactory.decodeResource(EntityManager.entityCanvas.getResources(), R.drawable.earth);
+        this.bitmap = BitmapFactory.decodeResource(EntityManager.entityCanvas.getResources(), R.drawable.earth);
+        this.model = new PlanetModel(JSONReader.getJSONObject(resourceId), this);
     }
 
     @Override

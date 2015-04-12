@@ -102,7 +102,7 @@ public class Asteroid implements Entity, Serializable {
         String description = model.description;
 
         Point position = model.position;
-        return new ImgTextEntity(title, imgPath, description, position);
+        return new ImgTextEntity(title, imgPath, description, position, this);
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {
