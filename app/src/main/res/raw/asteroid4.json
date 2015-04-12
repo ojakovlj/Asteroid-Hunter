@@ -1,5 +1,7 @@
 {
-	"cards" : [	{	
+	"cards" : 
+	[
+		{
 			"name" : "1999 JU3",
 			"image" : "asteroid4.jpg",
 			"text" : "The asteroid was discovered on May 10, 1999 by the LINEAR project.\n Dimensions: 980 � 29 m\n Rotation period: 7.627 hours\n Orbital period: 1.2974 years (473.9 days)\n Minor planet category: Apollo asteroid",

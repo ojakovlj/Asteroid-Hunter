@@ -1,66 +1,66 @@
 {
-	"cards" : [{
-			"name" : "Itokawa",
-			"image" : "img2.jpg",
-			"text" : "Discovery date:	26 September 1998\nOrbital period: 1.52 a (556.355 d)\nAverage orbital speed: 25.37 km/s\nDimensions	535 × 294 × 209 m\nMass: (3.51±0.105)×1010 kg, (3.58±0.18)×1010 kg\nMean density:1.9 ±0.13 g/cm³,[1]1.95 ± 0.14 g/cm³\nTemperature: ~206 K"
-			"coordinates" : {
-				"x" : -110,
-				"y" : 210
-			}
-
-		}, {
-			"name" : "Itokawa's missions",
-			"image" : "",
-			"text" : "In 2000, it was selected as the target of Japan's Hayabusa mission. It was selectet as the third change, but was the right choice. The probe arrived in the vicinity of Itokawa on 12 September 2005 and initially parked in an asteroid–Sun line at 20 km, and later 7 km, from the asteroid (Itokawa's gravity was too weak to provide an orbit, so the spacecraft adjusted its orbit around the Sun until it matched the asteroid's). Hayabusa landed on 20 November for thirty minutes, but it failed to operate a device designed to collect soil samples. On 25 November, a second landing and sampling sequence was attempted. The sample capsule was returned to Earth and landed at Woomera, South Australia on 13 June 2010, around 13:51 UTC (23:21 local). On 16 November 2010, the Japan Aerospace Exploration Agency reported that dust collected during Hayabusa's voyage was indeed from the asteroid."
-			"coordinates" : {
-				"x" : -110,
-				"y" : 260
-			}
-
-		}, {
-			"name" : "What makes Itokawa special",
-			"image" : "img6.jpg",
-			"text" : "After Hayabusa mission, scientists discovered a lot of information about this asteroid. It has unique shape that looks as if it consists of two distinct shapes. One is smooth and other is rocky. The rocky side has a big number of rocks (the biggest one is about 50 m in size). As the area and particle size distribution of the regolith, rocks and craters are analyzed, we will get closer to finding the history of the impacts that Itokawa has experienced as well as the evolution of asteroids and the solar system. Further studies will help us find the types of collisions an asteroid experiences from its birth.",
-			"coordinates" : {
-				"x" : -110,
-				"y" : 310
-			}
-		}, {
-			"name" : "It is 2040...",
-			"image" : "img1.jpg",
-			"text" : "Itokawa was very helpful for scientists in their research. We now know many more about the history of the planet we live on. Of course, other asteroids were used as well, but Itokawa was one of the most important ones. Japan was not the only country doing the research, it cooworked with countries overseas, as was hoped.",
-			" coordinates " : {
-				" x " : -110,
-				" y " : 360
-			}
-		}, {
-			" name " : " Road to Mars begins at an asteroid ",
-			" image " : "img4.jpg",
-			" text " : " In 2020,Itokawa was prepared for liftoff to Mars by ARM (Asteroid Redirect Mission).It was very expensive, but very helpful in preparing astronauts for actual landing on Mars one day. Before they weren't able to test it as they wanted because their experiments were 'Earth Reliant' and could last only about six months. The robotic mission to capture and redirect an asteroid successfully tested how the Orion spacecraft, launched by a Space Launch System rocket, can dock and operate with a SEP-powered spacecraft. This new technology will help send the large amounts of cargo, habitats and propellant to Mars in advance of a human mission.",
-			" coordinates" : {
-				"x" : -110,
-				"y" : 410
-			}
-
-		}, {
-			"name" : "And why are we interested in Mars?",
-			"image" : "",
-			"text" : "Conditions on the surface of Mars are closer to the conditions on Earth in terms of temperature, atmospheric pressure than on any other planet or moon, except for the Venus. The solar day is very similar in its duration to Earth's. Mars has a surface area that is 28.4% of Earth's, only slightly less than the amount of dry land on Earth (which is 29.2% of Earth's surface). Some studies have shown that water ice can be found on Mars. All in all, those two planets have some important similarities.",
-			"coordinates" : {
-				"x" : -110,
-				"y" : 460
-			}
-
-		}, {
-			"name" : "It is 2100...",
-			"image" : "img10.jpg",
-			"text" : "Mars is now ready to welcome human race. With a huge help of asteroids, all planned material that will be crucial for initial survival of people is on Mars. The planet is waiting for us. Four people who were ready to pay for this adventure that is actually priceless, have already visited their future home. When they arrived back, they were full of impressions. One woman said that she would have been willing to stay there forever, hadn't she had family still on Earth. 'I will be very sorry if I don't live to become part of the first generation actually living on that beautiful red planet', she added.\nEarth has been a perfect home for us for thousands of years, but we haven't been that perfect to it. Now is time to pay our price and move to another planet as Earth hasn't got enough supplies anymore for us to spend it recklessly, without thinking about the future. However, we believe human race does deserve another chance and are optimistic about the future.\nPlanet Mars, here we come!",
-			"coordinates" : {
-				"x" : -110,
-				"y" : 510
-			}
-
-		}
-
-	]
+    "cards": [
+        {
+            "name": "Itokawa",
+            "image": "img2.jpg",
+            "text": "",
+            "coordinates": {
+                "x": -110,
+                "y": 210
+            }
+        },
+        {
+            "name": "Itokawa'smissions",
+            "image": "",
+            "text": "",
+            "coordinates": {
+                "x": -110,
+                "y": 260
+            }
+        },{
+            "name": "WhatmakesItokawaspecial",
+            "image": "img6.jpg",
+            "text": "",
+            "coordinates": {
+                "x": -110,
+                "y": 310
+            }
+        },
+        {
+            "name": "Itis2040...",
+            "image": "img1.jpg",
+            "text": "",
+            "coordinates": {
+                "x": -110,
+                "y": 360
+            }
+        },
+        {
+            "name": "RoadtoMarsbeginsatanasteroid",
+            "image": "img4.jpg",
+            "text": "",
+            "coordinates": {
+                "x": -110,
+                "y": 410
+            }
+        },
+        {
+            "name": "AndwhyareweinterestedinMars?",
+            "image": "",
+            "text": "",
+            "coordinates": {
+                "x": -110,
+                "y": 460
+            }
+        },
+        {
+            "name": "Itis2100...",
+            "image": "img10.jpg",
+            "text": "",
+            "coordinates": {
+                "x": -110,
+                "y": 510
+            }
+        }
+    ]
 }
