@@ -1,16 +1,13 @@
 {
-    "title": 'Itokawa',
-	"imgPath": 'path',
-    "id": 1,
-    "position": {
-        "x": 150,
-        "y": 150.002
-    },
-    "description": 'isjdiahhasuhda skjdaisojdoisa sdjoaisjdiasn \n isjadioashdias shdoashd \n jdihasudbuqweuda',
-	"isNull": null,
-	"bool": true,
-	"benefits": {
-		"description": 'ijsdiahsudb sadhaisdn uhduasdn',
-		"title": 'Benefits of asteroid exploration'
-	}
+    "cards": [
+        {
+            "name": 'Itokawa',
+            "image": 'path',
+            "text": 'hduasbduasbduashduasdhuhsudhauh',
+            "coordinates": {
+                "x": 150,
+                "y": 150
+            }
+        }
+    ]
 }

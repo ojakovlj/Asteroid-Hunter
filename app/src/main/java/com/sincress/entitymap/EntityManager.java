@@ -1,7 +1,6 @@
 package com.sincress.entitymap;
 
 
-import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -159,7 +158,7 @@ public class EntityManager {
                 }
                 // Type = Asteroid
                 else if (clickedEntity.getType() == Entity.EntityType.Asteroid){
-                    entities.add( ((Asteroid) clickedEntity).getImgTextEntity());
+                    entities.addAll( ((Asteroid) clickedEntity).getInfoboxes());
                     entityCanvas.postInvalidate();
                 }
                 // Type = Earth
