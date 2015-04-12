@@ -84,13 +84,13 @@ public class EntityManager {
      */
     private static Entity isInEntity(ArrayList<Entity> array, Point coordinate){
         Point position, dimension;
-
-        for(Entity entity: array){
-            position = entity.getPosition();
-            dimension = entity.getEntityDimens();
-            if(coordinate.x > position.x && coordinate.x < position.x+dimension.x)
-                if(coordinate.y > position.y && coordinate.y < position.y+dimension.y)
-                    return entity;
+        for (int i = array.size()-1; i>= 0; i--)
+        {
+            position = array.get(i).getPosition();
+            dimension = array.get(i).getEntityDimens();
+            if (coordinate.x > position.x && coordinate.x < position.x + dimension.x)
+                if (coordinate.y > position.y && coordinate.y < position.y + dimension.y)
+                    return array.get(i);
         }
         return null;
     }
