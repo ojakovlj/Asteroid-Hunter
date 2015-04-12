@@ -3,6 +3,7 @@ package com.sincress.entitymap;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -17,10 +18,12 @@ import com.sincress.entitymap.Entities.ImgTextEntity;
 import com.sincress.entitymap.Entities.Planet;
 import com.sincress.entitymap.EntityCanvas.Connector;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
@@ -108,14 +111,28 @@ public class EntityManager {
 
         if(clickedEntity.getType() == Entity.EntityType.ImgText) {
             if(!((ImgTextEntity)clickedEntity).imageFile.equals("")) {
-                Bitmap bmp = BitmapFactory.decodeFile(((ImgTextEntity) clickedEntity).imageFile);
+                Bitmap bmp = null;
+                try {
+                    Context ctx = entityCanvas.getActivity().getApplicationContext();
+                    InputStream is = ctx.getAssets().open(((ImgTextEntity) clickedEntity).imageFile);
+                    bmp = BitmapFactory.decodeStream(is);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 image.setImageBitmap(bmp);
             }
             textView.setText(((ImgTextEntity) clickedEntity).textContent);
         }
         else {
             if(!((Planet)clickedEntity).imageFile.equals("")) {
-                Bitmap bmp = BitmapFactory.decodeFile(((Planet) clickedEntity).imageFile);
+                Bitmap bmp = null;
+                try {
+                    Context ctx = entityCanvas.getActivity().getApplicationContext();
+                    InputStream is = ctx.getAssets().open(((Planet) clickedEntity).imageFile);
+                    bmp = BitmapFactory.decodeStream(is);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 image.setImageBitmap(bmp);
             }
             textView.setText(((Planet) clickedEntity).textContent);

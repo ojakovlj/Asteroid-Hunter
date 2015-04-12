@@ -36,9 +36,11 @@ public class Asteroid implements Entity, Serializable {
                 break;
             case 2:
                 drawableId = R.drawable.asteroid2;
+                rawId = R.raw.asteroid2;
                 break;
             case 3:
                 drawableId = R.drawable.asteroid3;
+                rawId = R.raw.asteroid3;
                 break;
             case 4:
                 drawableId = R.drawable.asteroid4;

@@ -1,7 +1,7 @@
 {
 	"cards" : [{
 			"name" : "Introduction",
-			"image" : "",
+			"image" : "img1.jpg",
 			"text" : "The Earth has limited material and energy resources while these resources in space are virtually unlimited. Further development of humanity will require going beyond our planet and exploring of extraterrestrial resources and sources of unlimited power.\n Asteroids have resource potential, notably the potential for providing water, which can be decomposed into hydrogen and oxygen for propellant use.\n Moreover, asteroids and other planetary bodies including the Moon offer mining and resource potential, with supplies of minerals including platinum group elements and metals.",
 			"coordinates" : {
 				"x" : 200,
@@ -9,7 +9,7 @@
 			}
 		}, {
 			"name" : "Benefits of asteroid exploration",
-			"image" : "",
+			"image" : "img2.txt",
 			"text" : "Science:\n- investigating the origins of the Solar System and of life\nHazards:\n- finding NEOs that could impact the Earth as a prelude to deflecting them.\nResources:\n- in the long term NEOs contain the most accessible resources in space, for propellant, life support, and construction materials.",
 			"coordinates" : {
 				"x" : 200,
@@ -17,7 +17,7 @@
 			}
 		}, {
 			"name" : "The OSIRIS-REx mission",
-			"image" : "",
+			"image" : "img3.jpg",
 			"text" : "Origins Spectral Interpretation Resource Identification and Security-Regolith Explorer (OSIRIS-REx) mission seeks answers to questions that are central to the human experience: Where did we come from? What is our destiny?\n OSIRIS-REx is going to Bennu, a carbon-rich asteroid that records the earliest history of our Solar System, and bringing a piece of it back to Earth for a detailed analysis.",
 			"coordinates" : {
 				"x" : 200,
@@ -25,7 +25,7 @@
 			}
 		}, {
 			"name" : "The AIDA mission",
-			"image" : "",
+			"image" : "img4.jpg",
 			"text" : "The Asteroid Impact & Deflection Assessment (AIDA) mission is a joint international collaboration with a goal to test our ability to perform a spacecraft impact on a potentially hazardous near-Earth asteroid and to measure and characterize the deflection caused by the impact. The AIDA mission will be the first space experiment to demonstrate asteroid impact hazard mitigation by using a kinetic impactor to deflect an asteroid. AIDA will return vital data to determine the momentum transfer efficiency of the kinetic impact and key physical properties of the target asteroid.",
 			"coordinates" : {
 				"x" : 200,
@@ -33,7 +33,7 @@
 			}
 		}, {
 			"name" : "Asteroid mining",
-			"image" : "",
+			"image" : "img5.jpg",
 			"text" : "The Earth is nearing depletion of its natural resources at a time when human beings are rapidly expanding the frontiers of space. The resources which may exist on asteroids could have enormous potential for aiding and enhancing human space exploration as well as life on Earth. With the possibly limitless opportunities that exist, it is clear that asteroids are the next step for human existence in space. The most important human activities in space in the latter half of the 21st-century may be associated with harnessing the resources of the near-Earth asteroids for industrial processes. The near-Earth asteroids contain enough iron to produce the equivalent of a new car for every person in the solar system each year for a 1000 years. Asteroids provide an abundance of semiconductor elements, hydrogen and oxygen used for fuel, and platinum group metals.\n By the 2030s, the relative cost to extract platinum, a rare Earth metal, from asteroids, will be much less than producing it on Earth. It is estimated that 10 per cent of all NEOs are more accessible than the Moon in terms of fuel requirements, and are much easier to return to Earth from than the Moon. If one were to separate out the precious metals in the near-Earth asteroids, one could extract a few million dollars worth of platinum group metals for each person in the solar system!",
 			"coordinates" : {
 				"x" : 200,
