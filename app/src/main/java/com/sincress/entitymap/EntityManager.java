@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.sincress.entitymap.Abstract.Entity;
 import com.sincress.entitymap.Entities.Asteroid;
 import com.sincress.entitymap.Entities.ImgTextEntity;
+import com.sincress.entitymap.Entities.Planet;
 import com.sincress.entitymap.EntityCanvas.Connector;
 
 import java.io.FileInputStream;
@@ -103,15 +104,22 @@ public class EntityManager {
         ImageView image = (ImageView) fragmentview.findViewById(R.id.image);
         TextView textView = (TextView) fragmentview.findViewById(R.id.descText);
 
-        if(!((ImgTextEntity)clickedEntity).imageFile.equals("")) {
-            Bitmap bmp = BitmapFactory.decodeFile(((ImgTextEntity) clickedEntity).imageFile);
-            image.setImageBitmap(bmp);
-        }
 
-        if(clickedEntity.getType() == Entity.EntityType.ImgText)
-            textView.setText(((ImgTextEntity)clickedEntity).textContent);
-        //else
-        //  textView.setText(((Planet)entity).textContent);
+
+        if(clickedEntity.getType() == Entity.EntityType.ImgText) {
+            if(!((ImgTextEntity)clickedEntity).imageFile.equals("")) {
+                Bitmap bmp = BitmapFactory.decodeFile(((ImgTextEntity) clickedEntity).imageFile);
+                image.setImageBitmap(bmp);
+            }
+            textView.setText(((ImgTextEntity) clickedEntity).textContent);
+        }
+        else {
+            if(!((Planet)clickedEntity).imageFile.equals("")) {
+                Bitmap bmp = BitmapFactory.decodeFile(((Planet) clickedEntity).imageFile);
+                image.setImageBitmap(bmp);
+            }
+            textView.setText(((Planet) clickedEntity).textContent);
+        }
     }
 
     public static View.OnTouchListener onTouchListener = new View.OnTouchListener() {
@@ -191,5 +199,9 @@ public class EntityManager {
     public static void initialise() {
         Asteroid ast1 = new Asteroid(1, new Point(200, 100));
         entityCanvas.addEntity(ast1);
+        Planet earth = new Planet("", "Welcome to planet Earth!",
+                new Point(2091-entityCanvas.IMAGE_SIZE_X*entityCanvas.H_AREA_SIZE,
+                        1465-entityCanvas.IMAGE_SIZE_Y*entityCanvas.H_AREA_SIZE));
+        entityCanvas.addEntity(earth);
     }
 }

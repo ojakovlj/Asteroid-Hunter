@@ -88,11 +88,7 @@ public class CanvasActivity extends ActionBarActivity{
             case R.id.action_zoomout:
                 entityCanvas.setScale(false);
                 return true;
-            case R.id.action_load:
-                EntityManager.loadEntities("entities");
-                return true;
-            case R.id.action_save:
-                EntityManager.saveEntities(entityCanvas.getEntities(), "entities");
+            case R.id.action_clear:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

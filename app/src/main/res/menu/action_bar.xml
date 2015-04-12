@@ -11,13 +11,8 @@
         android:title="Zoom in"
         yourapp:showAsAction="always" />
     <item
-        android:id="@+id/action_save"
-        android:icon="@drawable/save"
-        android:title="Save"
-        yourapp:showAsAction="always" />
-    <item
-        android:id="@+id/action_load"
-        android:icon="@drawable/open"
-        android:title="Load"
+        android:id="@+id/action_clear"
+        android:icon="@drawable/clear"
+        android:title="Clear save"
         yourapp:showAsAction="always" />
 </menu>
