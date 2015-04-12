@@ -5,8 +5,8 @@
 			"image": "asteroid2.jpg",
 			"text": "Dimensions: ~800 m\nMass: 5.27x10^11 kg\nMean density: 1.7±0.4 g/cm^3\nRotation period 2.259 h\nAlbedo: 0.16 ± 0.04\nSpectral type: Xk\nAbsolute magnitude (H): 18.0",
 			"coordinates": {
-				"x": 245,
-				"y": 298
+				"x": 200,
+				"y": -75
 			}
 		},
 		{
@@ -14,8 +14,8 @@
 			"image": "img2.jpg",
 			"text": "NASA had been developing a new rocket – the Space Launch System (SLS) – along with a manned spacecraft placed at Earth-Moon Lagrange Point 2. The agency's longer term goals included sending astronauts to Mars, rather than the Moon's surface. However, private commercial ventures, such as inflatable modules designed by Bigelow Aerospace, were also getting underway and involved some testing and collaboration with NASA. Additionally, the SLS had performed lunar orbits during its testing, along with crewed asteroid missions.",
 			"coordinates": {
-				"x": 245,
-				"y": 298
+				"x": 200,
+				"y": -25
 			}
 		},
 		{
@@ -23,8 +23,8 @@
 			"image": "img8.jpg",
 			"text": "NASA lands an astronaut on an asteroid. Experience is gained in finding ways to deflect potentially harmful rocks that may threaten Earth. On-site examination also provides new insights into the economic value of these space rocks and the resources they contain – adding to the knowledge from private ventures like Planetary Resources and Deep Space Industries. Perhaps more importantly, technologies can be tested, alongside training of processes, for later use in Mars missions during the 2030s.",
 			"coordinates": {
-				"x": 245,
-				"y": 48
+				"x": 200,
+				"y": 25
 			}
 		},
 		{
@@ -32,8 +32,8 @@
 			"image": "img5.jpg",
 			"text": "Space development and infrastructure necessary to further space exploration and exploitation. Initially confined to near-Earth asteroids, these operations have been expanded by the early 2030s to include a number of rocks in the main asteroid belt, between Mars and Jupiter. This region contains over a billion times more metal than exists on Earth, along with virtually endless supplies of water-ice, vastly expanding the potential for commercial exploitation. Various new companies have been formed specialising in particular technologies, spacecraft and mining methods.",
 			"coordinates": {
-				"x": 245,
-				"y": 98
+				"x": 200,
+				"y": 75
 			}
 		},
 		{
@@ -41,8 +41,8 @@
 			"image": "img6.jpg",
 			"text": "Asteroid mining prospers, as well as humankind's expansion in space",
 			"coordinates": {
-				"x": 3245,
-				"y": 1148
+				"x": 200,
+				"y": 125
 			}
 		},
 		{
@@ -50,8 +50,8 @@
 			"image": "",
 			"text": "As part of the recent exploration of the Kuiper Belt, an unmanned robotic probe has been sent to intercept 2060 Chiron, a minor planet, arriving this year. The mission returns vital data about Chiron's size, shape, polar obliquity, atmosphere, surface morphology, composition, internal structure, surface activity (including the nature of Chiron's outbursts), and its origin. NASA had been planning for such a mission as far back as 1994.",
 			"coordinates": {
-				"x": 3245,
-				"y": 1198
+				"x": 200,
+				"y": 175
 			}
 		}
 	]

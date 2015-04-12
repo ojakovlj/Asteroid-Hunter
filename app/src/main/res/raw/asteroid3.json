@@ -6,8 +6,8 @@
             "text": "Mean radius: 247±10 m\nMass: 1.4×10^11 kg\nAlbedo: 0.03–0.06\nTemperature: 371 K\nSemi-major axis: 1.126 AU\nOrbital period: 436.604 d\nAlbedo: 0.045",
             "coordinates":
             {
-                "x": 1950,
-                "y": 2097
+                "x": 175,
+                "y": -100
             }
         },
         {
@@ -16,8 +16,8 @@
             "text": "In 2021, a first manned test of the Space Launch System (SLS) is conducted. In this same year, a crewed asteroid mission takes place. Using a robotic probe, NASA captures a small rock, which is dragged into a stable orbit around the Moon. Astronauts are then sent to explore it, travelling on-board the SLS, before moving in closer with the Orion, followed by a smaller craft known as the Space Exploration Vehicle (SEV). The success of this first expedition leads to further asteroid missions in subsequent years.",
             "coordinates":
             {
-                "x": 1950,
-                "y": 2147
+                "x": 175,
+                "y": -50
             }
         },
         {
@@ -26,8 +26,8 @@
             "text": "Arguably the most long-overdue of all space missions – a manned trip to Mars – is finally undertaken by 2033. Six decades after the Apollo landings, technology is now greatly improved, particularly with regards to computing. A new heavy-lift launch vehicle has been developed, together with a smaller craft known as the Multi-Purpose Crew Vehicle (MPCV). This is based on designs originally planned for the Orion Crew Exploration Vehicle. The MPCV is capable of carrying four astronauts on 21-day missions. For journeys to Mars, which typically take several months, it is attached to other modules with longer-term consumables and support capabilities.",
             "coordinates":
             {
-                "x": 1950,
-                "y": 2247
+                "x": 175,
+                "y": 0
             }
         },
         {
@@ -36,8 +36,8 @@
             "text": "Asteroid mining – once considered science fiction – became a reality in the 2020s with new startup ventures like Planetary Resources and Deep Space Industries. Critics had doubted that such operations were feasible, pointing to the huge costs involved. However, the majority of materials mined by these new companies were destined for use in space, avoiding the enormous fuel costs of repeatedly returning to and escaping from Earth's gravitational field. In addition, servicing of communications satellites would earn them $5-8 million per month. They also had tremendous public support and involvement through crowdfunding, for example, along with teams of ex-NASA staff who were highly experienced.",
             "coordinates":
             {
-                "x": 1950,
-                "y": 2297
+                "x": 175,
+                "y": 50
             }
         },
         {
@@ -46,8 +46,8 @@
             "text": "By the mid-21st century, further expansion has turned asteroid mining into a huge industry with swarms of automated probes involved in prospecting and mining across the inner Solar System. Previously rare metals are made cheap and abundant. Further into the future, even the distant Kuiper Belt and Oort Cloud will be exploited, as humanity advances towards Type II status on the Kardashev scale.",
             "coordinates":
             {
-                "x": 1950,
-                "y": 2347
+                "x": 175,
+                "y": 100
             }
         },
         {
@@ -56,8 +56,8 @@
             "text": "Asteroid mining has now evolved into a huge industry, with major firms competing in the business. Thanks to progress in rocket technology and robotics, countless rendezvous with near-Earth and main belt asteroids have been conducted. A wide range of metals and minerals – including gold, platinum, nickel, iron, zinc, antimony, copper, cobalt and phosphorus – are being recovered. Some of these materials became so rare on Earth that demand made them exceedingly valuable. This drove accelerated exploration. Swarms of automated probes are now involved in prospecting and mining on a constant basis.",
             "coordinates":
             {
-                "x": 1950,
-                "y": 2397
+                "x": 175,
+                "y": 150
             }
         },
         {
@@ -66,8 +66,8 @@
             "text": "Along with mining of asteroids and the Moon, fresh metal and mineral supplies are now becoming available on Earth, thanks to advances in nanotechnology which enable machines to perfectly separate each individual substance out of a rock sample. Phosphorus reserves, for example, are secure now, since even the abundant low quality sources can be mined.",
             "coordinates":
             {
-                "x": 1950,
-                "y": 2447
+                "x": 175,
+                "y": 200
             }
         }
 	]
