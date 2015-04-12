@@ -1,13 +1,60 @@
 {
-    "cards": [
-        {
-            "name": 'Itokawa',
-            "image": 'path',
-            "text": 'hduasbduasbduashduasdhuhsudhauh',
-            "coordinates": {
-                "x": 194,
-                "y": -120
-            }
-        }
-    ]
+	"cards" : [	{	
+			"name" : "1999 JU3",
+			"image" : "asteroid4.jpg",
+			"text" : "The asteroid was discovered on May 10, 1999 by the LINEAR project.\n Dimensions: 980 � 29 m\n Rotation period: 7.627 hours\n Orbital period: 1.2974 years (473.9 days)\n Minor planet category: Apollo asteroid",
+			"coordinates" : {
+				"x" : 194,
+				"y" : -120
+			}
+		}, {
+			"name" : "Why is 1999 JU3 special",
+			"image" : "",
+			"text" : "1999 JU3 is one of the most accessible asteroids by spacecraft and therefore it was chosen as a destination for Hayabusa 2 asteroid sample return mission operated by the Japanese space agency and also for NASA's Asteroid Redirect Mission. Another interesting characteristic of 1999 JU3 is his rare spectral type Cg, which means it has qualities of both a C-type asteroid and a G-type asteroid.",
+			"coordinates" : {
+				"x" : 194,
+				"y" : -70
+			}
+		}, {
+			"name" : "Samples and their meaning",
+			"image" : "img3.jpg",
+			"text" : "Asteroids contain a wide range of minerals and chemicals. Carbonaceous asteroids, like 1999 JU3, contain a wide range of organic molecules such as amino acids. This material will provide important clues to the origin of life on Earth and the likelihood that life may have originated elsewhere in our solar system.",
+			"coordinates" : {
+				"x" : 194,
+				"y" : -20
+			}
+		}, {
+			"name" : "Important information found!",
+			"image" : "img7.jpg",
+			"text" : "1999 JU3 asteroid redirect mission ended in 2046 and was very successful. Samples collected from 1999 JU3 contained some DNA components. Later it was found that those DNA components correspond to the ones found in Asia in 2013 which come from an entirely different unknown human species.",
+			"coordinates" : {
+				"x" : 194,
+				"y" : 30
+			}
+		}, {
+			"name" : "Examination of DNA components",
+			"image" : "dna.jpg",
+			"text" : "Due to this new discovery, people have decided to once again explore the area in Asia where those DNA components were found. They studied the DNA structure and came to the shocking discovery. The DNA belonged to super human race which was named Homo Super Sapiens accordingly.",
+			"coordinates" : {
+				"x" : 194,
+				"y" : 80
+			}
+		}, {
+			"name" : "From homo sapiens to Homo Super Sapiens",
+			"image" : "teta.jpg",
+			"text" : "In 2087 scientists managed to create and improve human DNA based on the DNA of Homo Super Sapiens and first Homo Super Sapiens was born! Humans now have wings and gills like the race Homo Super Sapiens once had.",
+			"coordinates" : {
+				"x" : 194,
+				"y" : 130
+			}
+		}, {
+			"name" : "Looking for our family far away!",
+			"image" : "img6.jpg",
+			"text" : "Human race, now Homo Super Sapiens, decided to take a trip to outer space to look for more possible colonies of Homo Super Sapiens since the samples of their DNA were found exactly on our asteroid 1999 JU3 during Asteroid Redirect Mission!",
+			"coordinates" : {
+				"x" : 194,
+				"y" : 180
+			}
+		}
+	]
 }
