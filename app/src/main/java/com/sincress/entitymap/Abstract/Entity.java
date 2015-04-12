@@ -10,6 +10,9 @@ public interface Entity {
         Asteroid,
         Planet
     }
+
+    public int getRawId();
+
     // Draw entity to a canvas (map)
     public void drawEntity(Canvas canvas);
     // Get entity width and height

@@ -20,80 +20,80 @@
 			"image" : "",
 			"text" : "Origins Spectral Interpretation Resource Identification and Security-Regolith Explorer (OSIRIS-REx) mission seeks answers to questions that are central to the human experience: Where did we come from? What is our destiny?\n OSIRIS-REx is going to Bennu, a carbon-rich asteroid that records the earliest history of our Solar System, and bringing a piece of it back to Earth for a detailed analysis.",
 			"coordinates" : {
-				"x" : ,
-				"y" :
+				"x" : 0,
+				"y" : 0
 			}
 		}, {
 			"name" : "The AIDA mission",
 			"image" : "",
 			"text" : "The Asteroid Impact & Deflection Assessment (AIDA) mission is a joint international collaboration with a goal to test our ability to perform a spacecraft impact on a potentially hazardous near-Earth asteroid and to measure and characterize the deflection caused by the impact. The AIDA mission will be the first space experiment to demonstrate asteroid impact hazard mitigation by using a kinetic impactor to deflect an asteroid. AIDA will return vital data to determine the momentum transfer efficiency of the kinetic impact and key physical properties of the target asteroid.",
 			"coordinates" : {
-				"x" : ,
-				"y" :
+				"x" : 0,
+				"y" : 0
 			}
 		}, {
 			"name" : "Asteroid mining",
 			"image" : "",
 			"text" : "The Earth is nearing depletion of its natural resources at a time when human beings are rapidly expanding the frontiers of space. The resources which may exist on asteroids could have enormous potential for aiding and enhancing human space exploration as well as life on Earth. With the possibly limitless opportunities that exist, it is clear that asteroids are the next step for human existence in space. The most important human activities in space in the latter half of the 21st-century may be associated with harnessing the resources of the near-Earth asteroids for industrial processes. The near-Earth asteroids contain enough iron to produce the equivalent of a new car for every person in the solar system each year for a 1000 years. Asteroids provide an abundance of semiconductor elements, hydrogen and oxygen used for fuel, and platinum group metals.\n By the 2030s, the relative cost to extract platinum, a rare Earth metal, from asteroids, will be much less than producing it on Earth. It is estimated that 10 per cent of all NEOs are more accessible than the Moon in terms of fuel requirements, and are much easier to return to Earth from than the Moon. If one were to separate out the precious metals in the near-Earth asteroids, one could extract a few million dollars worth of platinum group metals for each person in the solar system!",
 			"coordinates" : {
-				"x" : ,
-				"y" :
+				"x" : 0,
+				"y" : 0
 			}
 		}, {
 			"name" : "Asteroid redirection",
 			"image" : "",
 			"text" : "NASA's Asteroid Redirect Mission (ARM) is an early mission in the Proving Ground, marking a significant advancement in human exploration. It will build on the capabilities developed in low Earth orbit and  tested on space station, while pushing the envelope on state of the art capabilities needed for the next human destination: Mars.",
 			"coordinates" : {
-				"x" : ,
-				"y" :
+				"x" : 0,
+				"y" : 0
 			}
 		}, {
 			"name" : "Stages of the mission",
 			"image" : "",
-			"text" : "Identify:\nIn 2013 NASA’s Near Earth Object Observation (NEOO) Program began to amplify its coordinated efforts across the agency and global asteroid observation community to detect, track and characterize potentially hazardous asteroids. It increased the discovery rate by 45 percent in 2014. This enhanced effort has also increased the count of asteroids that are known to come very close to the Earth moon system and that might be suitable candidates for the ARM. Using telescopes on Earth and in space, NASA has already identified four candidate asteroids that have the right physical characteristics suitable for the mission.\n Redirect:\nOnce a target asteroid has been identified, NASA will launch a robotic vehicle to rendezvous with the boulder rich target. The spacecraft will further characterize the asteroid before selecting a boulder; it will then descend to the asteroid’s surface, collect the mass, and ascend and resume its journey. The spacecraft will be powered by the most advanced Solar Electric Propulsion (SEP) system ever, with 30 times more capability than the current state of the art. SEP uses power converted from sunlight to produce a continuous low thrust at very high efficiency levels, which substantially reduces the amount of propellant needed to travel to the asteroid and to transport the multi ton boulder to an orbit around the moon.\n Explore:\nThe first humans to visit the captured boulder will travel aboard NASA’s Orion spacecraft, launched from the new and powerful Space Launch System (SLS) rocket. This next class of astronauts will leverage knowledge from decades of operations in space, including the construction and use of the International Space Station in low Earth orbit. Investigating an asteroid in deep space presents new levels of challenge and opportunity for human space exploration. At distances of up to 300,000 miles from Earth, the crew will be farther from our home planet than ever before, operating at the frontier of human exploration.",
+			"text" : "Identify:\nIn 2013 NASAï¿½s Near Earth Object Observation (NEOO) Program began to amplify its coordinated efforts across the agency and global asteroid observation community to detect, track and characterize potentially hazardous asteroids. It increased the discovery rate by 45 percent in 2014. This enhanced effort has also increased the count of asteroids that are known to come very close to the Earth moon system and that might be suitable candidates for the ARM. Using telescopes on Earth and in space, NASA has already identified four candidate asteroids that have the right physical characteristics suitable for the mission.\n Redirect:\nOnce a target asteroid has been identified, NASA will launch a robotic vehicle to rendezvous with the boulder rich target. The spacecraft will further characterize the asteroid before selecting a boulder; it will then descend to the asteroidï¿½s surface, collect the mass, and ascend and resume its journey. The spacecraft will be powered by the most advanced Solar Electric Propulsion (SEP) system ever, with 30 times more capability than the current state of the art. SEP uses power converted from sunlight to produce a continuous low thrust at very high efficiency levels, which substantially reduces the amount of propellant needed to travel to the asteroid and to transport the multi ton boulder to an orbit around the moon.\n Explore:\nThe first humans to visit the captured boulder will travel aboard NASAï¿½s Orion spacecraft, launched from the new and powerful Space Launch System (SLS) rocket. This next class of astronauts will leverage knowledge from decades of operations in space, including the construction and use of the International Space Station in low Earth orbit. Investigating an asteroid in deep space presents new levels of challenge and opportunity for human space exploration. At distances of up to 300,000 miles from Earth, the crew will be farther from our home planet than ever before, operating at the frontier of human exploration.",
 			"coordinates" : {
-				"x" : ,
-				"y" :
+				"x" : 0,
+				"y" : 0
 			}
 		}, {
 			"name" : "What the future holds",
 			"image" : "",
 			"text" : "If the needed technological advancements are made, an important option to consider for harnessing space resources is that of replicating manufacturing systems. A replicating system can use the energy, information, and matter present in its environment to make copies of itself and some useful product. A key aspect of any proposed replicating space manufacturing system is that of closure. Three types of closure have been identified as important: energy closure, information closure, and matter closure If perfect closure in each of these areas could be achieved, the result would be a von Neumann machine Although the prospects of producing a true von Neumann machine are not good, it is likely that within the next century replicating systems with imperfect closure can be made to effectively support space industrialization.",
 			"coordinates" : {
-				"x" : ,
-				"y" :
+				"x" : 0,
+				"y" : 0
 			}
 		}, {
 			"name" : "Capture strategies",
 			"image" : "",
-			"text" : "Stage 1 - a continuous low thrust approach is applied in order to transport the asteroid to a rendezvous with the Earth’s sphere of influence.\n Stage 2 - create a stable orbit around the Earth after the rendezvous.",
+			"text" : "Stage 1 - a continuous low thrust approach is applied in order to transport the asteroid to a rendezvous with the Earthï¿½s sphere of influence.\n Stage 2 - create a stable orbit around the Earth after the rendezvous.",
 			"coordinates" : {
-				"x" : ,
-				"y" :
+				"x" : 0,
+				"y" : 0
 			}
 		}, {
 			"name" : "Mission types",
 			"image" : "",
 			"text" : "There are different kinds of mission types depending on who's doing the mining:\n- manned missions\n- automated missions\n- teleoperated missions",
 			"coordinates" : {
-				"x" : ,
-				"y" :
+				"x" : 0,
+				"y" : 0
 			}
 		}, {
 			"name" : "Manned missions",
 			"image" : "",
 			"text" : "There are many issues when manned missions are considered - long term exposure to zero gravity, exposure to dangerous solar radiation, designing controlled ecological life support systems, and man rating a deep space vehicle.",
 			"coordinates" : {
-				"x" : ,
-				"y" :
+				"x" : 0,
+				"y" : 0
 			}
 		}, {
 			"name" : "Automated missions",
 			"image" : "",
 			"text" : "Automated missions would decrease total production costs. Besides increasing capital (and R&D) costs, operations that are not exactly repetitive have more automation problems than do repetitive operations. Thus, mining costs are not lowered by automation as much as product manufacturing costs are. However, even a small equipment failure could potentially cause a mission to fail.",
 			"coordinates" : {
-				"x" : ,
-				"y" :
+				"x" : 0,
+				"y" : 0
 			}
 		}
 	]

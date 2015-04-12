@@ -165,7 +165,8 @@ public class EntityManager {
                 // Type = Earth
                 else{
                     // Toggle the fragment and display the relevant data
-                    entityCanvas.getActivity().toggleFragment(v);
+                    //entityCanvas.getActivity().toggleFragment(v);
+                    entities.addAll(((Planet) clickedEntity).getInfoboxes());
                 }
                 EntityManager.saveEntities(entityCanvas.getEntities(), "entities");
             }

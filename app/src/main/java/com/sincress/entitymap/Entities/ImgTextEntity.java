@@ -10,6 +10,7 @@ import android.graphics.Point;
 
 import com.sincress.entitymap.Abstract.Entity;
 import com.sincress.entitymap.EntityCanvas;
+import com.sincress.entitymap.Models.InfoBoxModel;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -23,13 +24,18 @@ public class ImgTextEntity implements Entity, Serializable {
     public int X, Y;
     private final int BOX_HEIGHT = 40;
     private ObjectAnimator fadeIn;
+    private InfoBoxModel model;
 
-    public ImgTextEntity(String title, String img, String text, Point pos){
-        boxTitle = title;
-        imageFile = img;
-        textContent = text;
-        X = pos.x;
-        Y = pos.y;
+    public ImgTextEntity(String title, String img, String text, Point pos) {
+        this(new InfoBoxModel(title, img, text, pos));
+    }
+    public ImgTextEntity(InfoBoxModel model) {
+        this.model = model;
+        boxTitle = model.name;
+        imageFile = model.image;
+        textContent = model.text;
+        X = model.position.x;
+        Y = model.position.y;
         setAlpha(1f);
         fadeIn = ObjectAnimator.ofFloat(this, "alpha", 0f, 1f);
         fadeIn.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -41,7 +47,12 @@ public class ImgTextEntity implements Entity, Serializable {
         fadeIn.start();
     }
 
-        @Override
+    @Override
+    public int getRawId() {
+        return 0;
+    }
+
+    @Override
     public void drawEntity(Canvas canvas) {
         Paint paint = new Paint();
         int boxWidth = calculateBoxSize();
