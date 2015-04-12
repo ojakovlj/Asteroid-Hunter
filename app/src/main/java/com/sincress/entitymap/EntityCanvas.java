@@ -27,9 +27,9 @@ public class EntityCanvas extends View {
     public int IMAGE_SIZE_X, IMAGE_SIZE_Y;
     public float ZOOM_LEVEL = 1.0f;
 
-    private int[] splash_alphas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    private int[] splash_xcoords = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    private int[] splash_ycoords = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private int[] splash_alphas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private int[] splash_xcoords = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private int[] splash_ycoords = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     public float shipX = 0, shipY = 0;
 
     public EntityCanvas(Context context, AttributeSet attrs) {
@@ -50,6 +50,20 @@ public class EntityCanvas extends View {
         // Set the onClick listeners defined in EntityManager
         this.setOnTouchListener(EntityManager.onTouchListener);
 
+        //RENDERING THREAD Game Main Loop
+        new Thread(new Runnable() {
+
+            public void run() {
+                while (true) { //otherwise thread will run only once
+                    try {
+                        Thread.sleep(25); //25 ms sleep, rendering @ 40 FPS
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    postInvalidate();
+                }
+            }
+        }).start();
         new Thread(new Runnable() {
             public void run() {
                 while (true) { //otherwise thread will run only once
@@ -58,7 +72,7 @@ public class EntityCanvas extends View {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    for (int i = 0; i < 20; i++) {
+                    for (int i = 0; i < 10; i++) {
                         try {
                             Thread.sleep(100); //100 ms sleep to update the ship splashes
                         } catch (InterruptedException e) {
@@ -161,7 +175,7 @@ public class EntityCanvas extends View {
         ArrayList<Bitmap> splashes = new ArrayList<Bitmap>();
         Paint paint = new Paint();
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             splashes.add(trailBmp);
             paint.setAlpha(splash_alphas[i]);
             if (splash_alphas[i] > 3) splash_alphas[i] -= 2;
@@ -187,19 +201,6 @@ public class EntityCanvas extends View {
             float hEntity1Width = start.getEntityDimens().x / 2, hEntity2Width = end.getEntityDimens().x / 2 ;
             canvas.drawLine(start.getPosition().x + hEntity1Width, start.getPosition().y + hEntityHeight,
                     end.getPosition().x + hEntity2Width, end.getPosition().y + hEntityHeight, paint);
-            /*float arrowX = end.getPosition().x > start.getPosition().x ? (end.getPosition().x+start.getPosition().x) /2:
-                    (start.getPosition().x - end.getPosition().x)/2;
-            float arrowY = end.getPosition().y > start.getPosition().y ? (end.getPosition().y - start.getPosition().y)/2 :
-                    (start.getPosition().y - end.getPosition().y)/2;
-            float coef =  (end.getPosition().x - start.getPosition().x) / (end.getPosition().y - start.getPosition().y);
-            float q = coef*coef + 1;
-
-            double arrow1X = (q*arrowX + 20*Math.sqrt(q)) / q;
-            double arrow1Y = coef*(arrow1X - arrowX) + arrowY;
-            double arrow2X = (q*arrowX - 20*Math.sqrt(q)) / q;
-            double arrow2Y = coef*(arrow2X - arrowX) + arrowY;
-            canvas.drawLine((float)arrow1X, (float)arrow1Y, arrowX, arrowY, paint);
-            canvas.drawLine((float)arrow2X, (float)arrow2Y, arrowX, arrowY, paint);*/
 
         }
     }

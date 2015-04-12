@@ -3,33 +3,39 @@
     android:layout_height="match_parent" tools:context="com.sincress.entitymap.PromptFragment"
     android:background="#333333">
 
-
-
-    <LinearLayout
+    <ScrollView
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="left|top">
-        <Button
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Close"
-            android:onClick="toggleFragment"
-            android:id="@+id/cancelbutton"
-            android:layout_gravity="right|bottom" />
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/image"
-            android:layout_gravity="left|top" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/image"
+                android:layout_gravity="left|top"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/descText"
-            android:textColor="#fff"
-            android:layout_gravity="left|top" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/descText"
+                android:textColor="#fff"
+                android:layout_gravity="left|center_vertical"
+                android:padding="15dp"/>
 
-    </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Close"
+                android:onClick="toggleFragment"
+                android:id="@+id/cancelbutton"
+                android:layout_gravity="center|bottom" />
+
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

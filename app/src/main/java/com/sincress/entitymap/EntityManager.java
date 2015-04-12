@@ -167,7 +167,9 @@ public class EntityManager {
                 clickedEntity = isInEntity(entities,
                         new Point((int) (event.getX()/entityCanvas.ZOOM_LEVEL + cameraX), (int) (event.getY()/entityCanvas.ZOOM_LEVEL + cameraY)));
 
-                if(clickedEntity == null || previousAction == MotionEvent.ACTION_MOVE)
+                // If drag start and end point are same not same, exit
+                if(clickedEntity == null || clickedEntity != isInEntity(entities,
+                        new Point((int) (oldClickX/entityCanvas.ZOOM_LEVEL + cameraX), (int) (oldClickY/entityCanvas.ZOOM_LEVEL + cameraY))))
                     return true;
                 // Type = ImgTextEntity
                 if(clickedEntity.getType() == Entity.EntityType.ImgText){
