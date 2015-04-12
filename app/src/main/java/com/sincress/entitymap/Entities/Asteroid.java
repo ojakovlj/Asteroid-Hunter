@@ -8,6 +8,7 @@ import android.graphics.Point;
 import com.sincress.entitymap.Abstract.Entity;
 import com.sincress.entitymap.EntityManager;
 import com.sincress.entitymap.Models.AsteroidModel;
+import com.sincress.entitymap.Models.InfoBoxModel;
 import com.sincress.entitymap.Models.JSONReader;
 import com.sincress.entitymap.R;
 
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Asteroid implements Entity, Serializable {
     private int id;
@@ -46,9 +48,8 @@ public class Asteroid implements Entity, Serializable {
                 drawableId = R.drawable.asteroid4;
                 break;
         }
-        model = new AsteroidModel(JSONReader.getJSONObject(rawId));
-
         this.bitmap = BitmapFactory.decodeResource(EntityManager.entityCanvas.getResources(), drawableId);
+        this.model = new AsteroidModel(JSONReader.getJSONObject(rawId), this);
     }
 
     @Override
@@ -97,14 +98,13 @@ public class Asteroid implements Entity, Serializable {
         return id;
     }
 
-    public ImgTextEntity getImgTextEntity() {
-        String title = model.title;
-
-        String imgPath = model.imgPath;
-        String description = model.description;
-
-        Point position = model.position;
-        return new ImgTextEntity(title, imgPath, description, position, this);
+    public ArrayList<ImgTextEntity> getInfoboxes() {
+        ArrayList<ImgTextEntity> entities = new ArrayList<>();
+        for (InfoBoxModel infobox : model.infoboxes)
+        {
+            entities.add(new ImgTextEntity(infobox));
+        }
+        return entities;
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {
@@ -118,7 +118,7 @@ public class Asteroid implements Entity, Serializable {
         this.id = in.readInt();
         this.rawId = in.readInt();
         this.position = new Point(in.readInt(), in.readInt());
-        this.model = new AsteroidModel(JSONReader.getJSONObject(this.rawId));
+        this.model = new AsteroidModel(JSONReader.getJSONObject(this.rawId), this);
 
         this.bitmap = BitmapFactory.decodeResource(EntityManager.entityCanvas.getResources(), this.drawableId);
     }

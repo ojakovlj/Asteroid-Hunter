@@ -2,27 +2,34 @@ package com.sincress.entitymap.Models;
 
 import android.graphics.Point;
 
+import com.sincress.entitymap.Entities.Asteroid;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class AsteroidModel {
-    public String title;
-    public String imgPath;
-    public String description;
-    public Point position;
+    public ArrayList<InfoBoxModel> infoboxes = new ArrayList<>();
 
-    public AsteroidModel(JSONObject json) {
+    public AsteroidModel(JSONObject json, Asteroid parent) {
         try {
-            this.title = json.getString("title");
-            this.imgPath = json.getString("imgPath");
-            this.description = json.getString("description");
-
-            JSONObject position = json.getJSONObject("position");
-            this.position = new Point(position.getInt("x"), position.getInt("y"));
-
+            JSONArray cards = json.getJSONArray("cards");
+            for (int i = 0; i < cards.length(); i++) {
+                JSONObject card = cards.getJSONObject(i);
+                JSONObject coordinates = card.getJSONObject("coordinates");
+                InfoBoxModel infobox = new InfoBoxModel(
+                        card.getString("name"),
+                        card.getString("image"),
+                        card.getString("text"),
+                        new Point(coordinates.getInt("x"), coordinates.getInt("y")),
+                        parent
+                );
+                infoboxes.add(infobox);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 }

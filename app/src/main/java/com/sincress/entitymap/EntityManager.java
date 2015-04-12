@@ -1,7 +1,6 @@
 package com.sincress.entitymap;
 
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -34,6 +33,7 @@ public class EntityManager {
     private static float clickX, clickY, oldClickX, oldClickY;
     public static EntityCanvas entityCanvas;
     private static Entity clickedEntity;
+    private static int previousAction = 0;
 
     public static void saveEntities(ArrayList<Entity> array, String filename){
         Context ctx = entityCanvas.getActivity().getApplicationContext();
@@ -87,13 +87,13 @@ public class EntityManager {
      */
     private static Entity isInEntity(ArrayList<Entity> array, Point coordinate){
         Point position, dimension;
-
-        for(Entity entity: array){
-            position = entity.getPosition();
-            dimension = entity.getEntityDimens();
-            if(coordinate.x > position.x && coordinate.x < position.x+dimension.x)
-                if(coordinate.y > position.y && coordinate.y < position.y+dimension.y)
-                    return entity;
+        for (int i = array.size()-1; i>= 0; i--)
+        {
+            position = array.get(i).getPosition();
+            dimension = array.get(i).getEntityDimens();
+            if (coordinate.x > position.x && coordinate.x < position.x + dimension.x)
+                if (coordinate.y > position.y && coordinate.y < position.y + dimension.y)
+                    return array.get(i);
         }
         return null;
     }
@@ -167,7 +167,7 @@ public class EntityManager {
                 clickedEntity = isInEntity(entities,
                         new Point((int) (event.getX()/entityCanvas.ZOOM_LEVEL + cameraX), (int) (event.getY()/entityCanvas.ZOOM_LEVEL + cameraY)));
 
-                if(clickedEntity == null)
+                if(clickedEntity == null || previousAction == MotionEvent.ACTION_MOVE)
                     return true;
                 // Type = ImgTextEntity
                 if(clickedEntity.getType() == Entity.EntityType.ImgText){
@@ -176,7 +176,7 @@ public class EntityManager {
                 }
                 // Type = Asteroid
                 else if (clickedEntity.getType() == Entity.EntityType.Asteroid){
-                    entities.add( ((Asteroid) clickedEntity).getImgTextEntity());
+                    entities.addAll( ((Asteroid) clickedEntity).getInfoboxes());
                     entityCanvas.postInvalidate();
                 }
                 // Type = Earth
@@ -200,6 +200,7 @@ public class EntityManager {
                 clickX = event.getX();
                 clickY = event.getY();
             }
+            previousAction = event.getAction();
             return true;
         }
     };
