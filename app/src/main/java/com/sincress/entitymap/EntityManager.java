@@ -30,6 +30,7 @@ public class EntityManager {
     private static float clickX, clickY, oldClickX, oldClickY;
     public static EntityCanvas entityCanvas;
     private static Entity clickedEntity;
+    private static int previousAction = 0;
 
     public static void saveEntities(ArrayList<Entity> array, String filename){
         Context ctx = entityCanvas.getActivity().getApplicationContext();
@@ -149,7 +150,7 @@ public class EntityManager {
                 clickedEntity = isInEntity(entities,
                         new Point((int) (event.getX()/entityCanvas.ZOOM_LEVEL + cameraX), (int) (event.getY()/entityCanvas.ZOOM_LEVEL + cameraY)));
 
-                if(clickedEntity == null)
+                if(clickedEntity == null || previousAction == MotionEvent.ACTION_MOVE)
                     return true;
                 // Type = ImgTextEntity
                 if(clickedEntity.getType() == Entity.EntityType.ImgText){
@@ -182,6 +183,7 @@ public class EntityManager {
                 clickX = event.getX();
                 clickY = event.getY();
             }
+            previousAction = event.getAction();
             return true;
         }
     };
