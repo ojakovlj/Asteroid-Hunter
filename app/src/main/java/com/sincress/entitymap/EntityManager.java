@@ -166,6 +166,7 @@ public class EntityManager {
                     // Toggle the fragment and display the relevant data
                     entityCanvas.getActivity().toggleFragment(v);
                 }
+                EntityManager.saveEntities(entityCanvas.getEntities(), "entities");
             }
             // ======================== ACTION MOVE ====================================
             if (event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -197,11 +198,21 @@ public class EntityManager {
     }
 
     public static void initialise() {
+        ArrayList<Entity> entities = loadEntities("entities");
+        if (entities.isEmpty()) {
+            entities = getDefaultEntities();
+        }
+        entityCanvas.setEntities(entities);
+    }
+
+    public static ArrayList<Entity> getDefaultEntities() {
+        ArrayList<Entity> entities = new ArrayList<>();
         Asteroid ast1 = new Asteroid(1, new Point(200, 100));
-        entityCanvas.addEntity(ast1);
+        entities.add(ast1);
         Planet earth = new Planet("", "Welcome to planet Earth!",
                 new Point(2091-entityCanvas.IMAGE_SIZE_X*entityCanvas.H_AREA_SIZE,
                         1465-entityCanvas.IMAGE_SIZE_Y*entityCanvas.H_AREA_SIZE));
-        entityCanvas.addEntity(earth);
+        entities.add(earth);
+        return entities;
     }
 }

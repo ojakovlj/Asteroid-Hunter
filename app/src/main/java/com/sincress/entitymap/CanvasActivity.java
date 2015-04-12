@@ -13,6 +13,8 @@ import android.view.View;
 
 import com.sincress.entitymap.Abstract.Entity;
 
+import java.util.ArrayList;
+
 public class CanvasActivity extends ActionBarActivity{
 
     private EntityCanvas entityCanvas;
@@ -89,8 +91,10 @@ public class CanvasActivity extends ActionBarActivity{
                 entityCanvas.setScale(false);
                 return true;
             case R.id.action_clear:
-                EntityManager.saveEntities(entityCanvas.getEntities(), "entities");
-                entityCanvas.setEntities(EntityManager.loadEntities("entities"));
+                ArrayList<Entity> entities = EntityManager.getDefaultEntities();
+                entityCanvas.setEntities(entities);
+                EntityManager.saveEntities(entities, "entities");
+                entityCanvas.postInvalidate();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
