@@ -7,9 +7,13 @@ import android.graphics.Point;
 
 import com.sincress.entitymap.Abstract.Entity;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Date;
 
-public class ImgTextEntity implements Entity {
+public class ImgTextEntity implements Entity, Serializable {
 
     public String boxTitle, imageFile, textContent;
     public int X, Y;
@@ -78,5 +82,21 @@ public class ImgTextEntity implements Entity {
     @Override
     public void setSelected(boolean isSelected) {
 
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.writeObject(this.boxTitle);
+        out.writeObject(this.imageFile);
+        out.writeObject(this.textContent);
+        out.writeInt(this.X);
+        out.writeInt(this.Y);
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        boxTitle = (String) in.readObject();
+        imageFile = (String) in.readObject();
+        textContent = (String) in.readObject();
+        X = in.readInt();
+        Y = in.readInt();
     }
 }

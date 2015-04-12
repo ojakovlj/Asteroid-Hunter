@@ -17,12 +17,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Reader;
+import java.io.Serializable;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
-public class Asteroid implements Entity{
+public class Asteroid implements Entity, Serializable {
     private int id;
     private Point position;
     private boolean isSelected;
@@ -32,7 +35,24 @@ public class Asteroid implements Entity{
     public Asteroid(int id, Point position) {
         this.id = id;
         this.position = position;
-        this.bitmap = BitmapFactory.decodeResource(EntityManager.entityCanvas.getResources(), R.drawable.asteroid1);
+
+        int resource;
+        switch (this.id) {
+            case 1:
+            default:
+                resource = R.drawable.asteroid1;
+                break;
+            case 2:
+                resource = R.drawable.asteroid2;
+                break;
+            case 3:
+                resource = R.drawable.asteroid3;
+                break;
+            case 4:
+                resource = R.drawable.asteroid4;
+                break;
+        }
+        this.bitmap = BitmapFactory.decodeResource(EntityManager.entityCanvas.getResources(), resource);
     }
 
     @Override
@@ -141,5 +161,34 @@ public class Asteroid implements Entity{
             e.printStackTrace();
         }
         return null;
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.writeInt(this.id);
+        out.writeObject(this.position);
+        out.writeObject(this.json);
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        this.id = in.readInt();
+        this.position = (Point) in.readObject();
+        this.json = (JSONObject) in.readObject();
+        int resource;
+        switch (this.id) {
+            case 1:
+            default:
+                resource = R.drawable.asteroid1;
+                break;
+            case 2:
+                resource = R.drawable.asteroid2;
+                break;
+            case 3:
+                resource = R.drawable.asteroid3;
+                break;
+            case 4:
+                resource = R.drawable.asteroid4;
+                break;
+        }
+        this.bitmap = BitmapFactory.decodeResource(EntityManager.entityCanvas.getResources(), resource);
     }
 }

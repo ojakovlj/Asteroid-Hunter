@@ -5,7 +5,9 @@ import android.graphics.Point;
 
 import com.sincress.entitymap.Abstract.Entity;
 
-public class Planet implements Entity {
+import java.io.Serializable;
+
+public class Planet implements Entity, Serializable {
 
     private Point position;
     private boolean isSelected;

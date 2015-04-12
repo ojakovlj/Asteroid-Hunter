@@ -11,6 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.sincress.entitymap.Abstract.Entity;
+
 public class CanvasActivity extends ActionBarActivity{
 
     private EntityCanvas entityCanvas;
@@ -87,8 +89,10 @@ public class CanvasActivity extends ActionBarActivity{
                 entityCanvas.setScale(false);
                 return true;
             case R.id.action_load:
+                EntityManager.loadEntities("entities");
                 return true;
             case R.id.action_save:
+                EntityManager.saveEntities(entityCanvas.getEntities(), "entities");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

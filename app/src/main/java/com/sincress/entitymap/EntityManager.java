@@ -1,6 +1,8 @@
 package com.sincress.entitymap;
 
 
+import android.app.Application;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -14,6 +16,13 @@ import com.sincress.entitymap.Entities.Asteroid;
 import com.sincress.entitymap.Entities.ImgTextEntity;
 import com.sincress.entitymap.EntityCanvas.Connector;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 
 public class EntityManager {
@@ -23,12 +32,41 @@ public class EntityManager {
     private static Entity clickedEntity;
 
     public static void saveEntities(ArrayList<Entity> array, String filename){
-        // TODO : Add save function to file with custom format
+        Context ctx = entityCanvas.getActivity().getApplicationContext();
+
+        try {
+            FileOutputStream fos = ctx.openFileOutput(filename, Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(array);
+            oos.close();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static ArrayList<Entity> loadEntities(String filename){
-        ArrayList<Entity> array = null;
-        // TODO : Add load function from file with custom format
+        ArrayList<Entity> array = new ArrayList<Entity>();
+        Context ctx = entityCanvas.getActivity().getApplicationContext();
+
+        try {
+            FileInputStream fis = ctx.openFileInput(filename);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            array = (ArrayList<Entity>) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         return array;
     }
 
@@ -113,6 +151,7 @@ public class EntityManager {
                 // Type = Asteroid
                 else if (clickedEntity.getType() == Entity.EntityType.Asteroid){
                     entities.add( ((Asteroid) clickedEntity).getImgTextEntity());
+                    entityCanvas.postInvalidate();
                 }
                 // Type = Earth
                 else{

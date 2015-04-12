@@ -55,6 +55,10 @@ public class EntityCanvas extends View {
     public ArrayList<Entity> getEntities() {
         return entities;
     }
+    public void setEntities(ArrayList<Entity> entities) {
+        this.entities.clear();
+        this.entities.addAll(entities);
+    }
 
     public void addEntity(Entity ent){
         entities.add(ent);
