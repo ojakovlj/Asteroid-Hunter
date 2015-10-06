@@ -6,6 +6,8 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,13 +35,12 @@ public class EntityManager {
     private static float clickX, clickY, oldClickX, oldClickY;
     public static EntityCanvas entityCanvas;
     private static Entity clickedEntity;
-    private static int previousAction = 0;
 
     public static void saveEntities(ArrayList<Entity> array, String filename){
         Context ctx = entityCanvas.getActivity().getApplicationContext();
 
         try {
-            FileOutputStream fos = ctx.openFileOutput(filename, Context.MODE_PRIVATE);
+            FileOutputStream fos = ctx.openFileOutput(filename, Context.MODE_WORLD_READABLE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(array);
             oos.close();
@@ -152,6 +153,7 @@ public class EntityManager {
         public boolean onTouch(View v, MotionEvent event) {
             float cameraX = entityCanvas.getCameraCoords().x;
             float cameraY = entityCanvas.getCameraCoords().y;
+
             ArrayList<Entity> entities = entityCanvas.getEntities();
             ArrayList<Connector> connectors = entityCanvas.getConnectors();
             // ======================== ACTION DOWN ====================================
@@ -159,15 +161,16 @@ public class EntityManager {
                 // Mark position for use in ACTION MOVE
                 oldClickX = clickX = event.getX();
                 oldClickY = clickY = event.getY();
-
             }
             // ======================== ACTION UP ====================================
             if (event.getAction() == MotionEvent.ACTION_UP) {
+                // Set flag for ship stopping sequence
+                entityCanvas.actionDone = true;
                 // Check if entity is clicked
                 clickedEntity = isInEntity(entities,
                         new Point((int) (event.getX()/entityCanvas.ZOOM_LEVEL + cameraX), (int) (event.getY()/entityCanvas.ZOOM_LEVEL + cameraY)));
 
-                // If drag start and end point are same not same, exit
+                // If drag start and end point are not same, exit
                 if(clickedEntity == null || clickedEntity != isInEntity(entities,
                         new Point((int) (oldClickX/entityCanvas.ZOOM_LEVEL + cameraX), (int) (oldClickY/entityCanvas.ZOOM_LEVEL + cameraY))))
                     return true;
@@ -192,36 +195,37 @@ public class EntityManager {
             // ======================== ACTION MOVE ====================================
             if (event.getAction() == MotionEvent.ACTION_MOVE) {
                 // Move the canvas
-               /* clampCameraPosition(cameraX, cameraY, event, v);
-                clickX = event.getX();
-                clickY = event.getY();*/
-                entityCanvas.shipHeading = (float) Math.atan2((oldClickY - event.getY()),(oldClickX - event.getX()));
-                entityCanvas.shipX = cameraX;// + entityCanvas.getWidth()/2;
-                entityCanvas.shipY = cameraY;// + entityCanvas.getHeight()/2;
-                clampCameraPosition(cameraX, cameraY, event, v, entityCanvas.getScale());
                 clickX = event.getX();
                 clickY = event.getY();
+                entityCanvas.actionDone = false;
+                entityCanvas.shipSpeed = calculateHeadingAndSpeed();
             }
-            previousAction = event.getAction();
             return true;
         }
     };
 
-
-    private static void clampCameraPosition(float cameraX, float cameraY, MotionEvent event, View v, float zoomLevel) {
-        int bottomBound = entityCanvas.H_AREA_SIZE  * entityCanvas.IMAGE_SIZE_Y - (int)(v.getHeight()/zoomLevel);
-        int topBound = -entityCanvas.H_AREA_SIZE * entityCanvas.IMAGE_SIZE_Y;
-        int leftBound = -entityCanvas.H_AREA_SIZE * entityCanvas.IMAGE_SIZE_X;
-        int rightBound = entityCanvas.H_AREA_SIZE * entityCanvas.IMAGE_SIZE_X - (int)(v.getWidth()/zoomLevel);
-        double newCameraX = cameraX + (clickX - event.getX());
-        double newCameraY = cameraY + (clickY - event.getY());
-        if(!(newCameraX > rightBound || newCameraX < leftBound))
-            cameraX += (clickX - event.getX());
-        if(!(newCameraY > bottomBound || newCameraY < topBound))
-            cameraY += (clickY - event.getY());
-        entityCanvas.setCameraCoords(cameraX, cameraY);
-        entityCanvas.postInvalidate();
+    private static double calculateHeadingAndSpeed() {
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        entityCanvas.getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int height = displaymetrics.heightPixels;
+        int width = displaymetrics.widthPixels;
+        entityCanvas.shipHeading = Math.atan2((clickY - height/2),(clickX - width/2));
+        double radius = Math.sqrt((clickX-height/2)*(clickX-height/2) + (clickX - width/2)*(clickX - width/2));
+        // Calculate speed for user character
+        double speed;
+        if(width < height){
+            if(radius < width/2)
+                speed = 20.0*(radius/width);
+            else speed = 10;
+        }
+        else{
+            if(radius < height/2)
+                speed = 20.0*(radius/height);
+            else speed = 10;
+        }
+        return speed;
     }
+
 
     public static void initialise() {
 //        ArrayList<Entity> entities = loadEntities("entities");

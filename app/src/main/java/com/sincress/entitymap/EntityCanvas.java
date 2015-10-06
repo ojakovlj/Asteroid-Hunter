@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.sincress.entitymap.Abstract.Entity;
@@ -16,13 +17,14 @@ import java.util.ArrayList;
 
 public class EntityCanvas extends View {
     public static EntityCanvas instance;
-    private float cameraX = 0, cameraY = 0;
+    private double cameraX = 0, cameraY = 0;
     //private Canvas canvas;
     private ArrayList<Entity> entities;
     private ArrayList<Connector> connectors;
     private CanvasActivity activity;
     private Bitmap background, spaceship, trailBmp;
-    public float shipHeading = 0;
+    public double shipHeading = 0, shipSpeed = 0;
+    public boolean actionDone = false;
     public final int H_AREA_SIZE = 5;
     public int IMAGE_SIZE_X, IMAGE_SIZE_Y;
     public float ZOOM_LEVEL = 1.0f;
@@ -30,7 +32,7 @@ public class EntityCanvas extends View {
     private int[] splash_alphas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private int[] splash_xcoords = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private int[] splash_ycoords = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    public float shipX = 0, shipY = 0;
+    public double shipX = 0, shipY = 0;
 
     public EntityCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -60,6 +62,40 @@ public class EntityCanvas extends View {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+
+                    cameraX += Math.cos(shipHeading)*shipSpeed;
+                    cameraY += Math.sin(shipHeading)*shipSpeed;
+                    shipX = cameraX;// + entityCanvas.getWidth()/2;
+                    shipY = cameraY;// + entityCanvas.getHeight()/2;
+                    if(actionDone) {
+                        if (shipSpeed > 0.2)
+                            shipSpeed -= 0.2;
+                        else shipSpeed = 0;
+                    }
+
+                    // Clamp camera position
+                    float ScrnW = getWidth()/ZOOM_LEVEL, ScrnH = getHeight()/ZOOM_LEVEL;
+                    int bottomBound = H_AREA_SIZE  * IMAGE_SIZE_Y - (int)(ScrnH);
+                    int topBound = -H_AREA_SIZE * IMAGE_SIZE_Y;
+                    int leftBound = -H_AREA_SIZE * IMAGE_SIZE_X;
+                    int rightBound = H_AREA_SIZE * IMAGE_SIZE_X - (int)(ScrnW);
+                    if(cameraX > rightBound){
+                        Log.d("Adjust ", "Right");
+                        cameraX = rightBound;
+                    }
+                    if(cameraX < leftBound) {
+                        Log.d("Adjust ", "Left");
+                        cameraX = leftBound;
+                    }
+                    if(cameraY < topBound) {
+                        Log.d("Adjust ", "Top");
+                        cameraY = topBound;
+                    }
+                    if(cameraY > bottomBound) {
+                        Log.d("Adjust ", "Bottom");
+                        cameraY = bottomBound;
+                    }
+
                     postInvalidate();
                 }
             }
@@ -68,11 +104,13 @@ public class EntityCanvas extends View {
             public void run() {
                 while (true) { //otherwise thread will run only once
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     for (int i = 0; i < 10; i++) {
+                        if(shipSpeed < 0.1)
+                            break;
                         try {
                             Thread.sleep(100); //100 ms sleep to update the ship splashes
                         } catch (InterruptedException e) {
@@ -127,7 +165,7 @@ public class EntityCanvas extends View {
             if (ZOOM_LEVEL > 0.5)
                 ZOOM_LEVEL -= 0.5f;
         }
-        //Call clamp camera position if the user unzooms while facing a lower/right boundary
+        // Clamp camera position if the user unzooms while facing a lower/right boundary
         int bottomBound = H_AREA_SIZE  * IMAGE_SIZE_Y - (int)(this.getHeight()/ZOOM_LEVEL);
         int rightBound = H_AREA_SIZE * IMAGE_SIZE_X - (int)(this.getWidth()/ZOOM_LEVEL);
         if(cameraX + (int)(this.getWidth()/ZOOM_LEVEL) > rightBound)
@@ -146,11 +184,11 @@ public class EntityCanvas extends View {
         super.onDraw(canvas);
 
         canvas.scale(ZOOM_LEVEL, ZOOM_LEVEL);
-        canvas.translate(-cameraX, -cameraY);
+        canvas.translate(-(float)cameraX, -(float)cameraY);
         // Draw our background, tiled
         for(int j=-H_AREA_SIZE; j<H_AREA_SIZE; j++)
             for(int i=-H_AREA_SIZE; i<H_AREA_SIZE; i++)
-                canvas.drawBitmap(background, IMAGE_SIZE_X*i, IMAGE_SIZE_Y*j, new Paint());
+                canvas.drawBitmap(background, IMAGE_SIZE_X*i, IMAGE_SIZE_Y*j, null);
         // Draw all connectors
         for (Connector line: connectors)
             line.drawConnector(canvas);
@@ -158,7 +196,7 @@ public class EntityCanvas extends View {
         for (Entity entity : entities)
             entity.drawEntity(canvas);
         drawTrail(canvas);
-        canvas.translate(cameraX, cameraY);
+        canvas.translate((float)cameraX, (float)cameraY);
 
         Matrix mtx = new Matrix();
         spaceship = BitmapFactory.decodeResource(getResources(), R.drawable.spaceship);
@@ -167,7 +205,7 @@ public class EntityCanvas extends View {
         spaceship = Bitmap.createBitmap(spaceship, 0, 0, spaceship.getWidth(), spaceship.getHeight(), mtx, true);
         float spaceshipX = this.getWidth()/2/ZOOM_LEVEL-spaceship.getWidth()/2;
         float spaceshipY = this.getHeight()/2/ZOOM_LEVEL-spaceship.getHeight()/2;
-        canvas.drawBitmap(spaceship, spaceshipX, spaceshipY, new Paint());
+        canvas.drawBitmap(spaceship, spaceshipX, spaceshipY, null);
     }
 
     public void drawTrail(Canvas canvas) {
@@ -178,7 +216,7 @@ public class EntityCanvas extends View {
         for (int i = 0; i < 10; i++) {
             splashes.add(trailBmp);
             paint.setAlpha(splash_alphas[i]);
-            if (splash_alphas[i] > 3) splash_alphas[i] -= 2;
+            if (splash_alphas[i] > 3) splash_alphas[i] -= 3;
             canvas.drawBitmap(splashes.get(i), splash_xcoords[i] - splashes.get(i).getWidth() / 2, splash_ycoords[i] - splashes.get(i).getWidth() / 2, paint);
         }
     }
