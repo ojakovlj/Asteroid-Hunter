@@ -22,7 +22,8 @@ public class EntityCanvas extends View {
     private ArrayList<Entity> entities;
     private ArrayList<Connector> connectors;
     private CanvasActivity activity;
-    private Bitmap background, spaceship, trailBmp;
+    private Bitmap background, spaceship_originalBMP, trailBmp;
+    private Matrix mtx;
     public double shipHeading = 0, shipSpeed = 0;
     public boolean actionDone = false;
     public final int H_AREA_SIZE = 5;
@@ -47,7 +48,11 @@ public class EntityCanvas extends View {
         IMAGE_SIZE_X = background.getWidth();
         IMAGE_SIZE_Y = background.getHeight();
         EntityManager.initialise();
-        //background = Bitmap.createScaledBitmap(background, screenW / 8, screenH / 8, false);
+
+        // Initialise the original spaceship bitmap to be used in OnDraw
+        spaceship_originalBMP = BitmapFactory.decodeResource(getResources(), R.drawable.spaceship);
+        // Prevent constant object re-allocation in onDraw
+        mtx = new Matrix();
 
         // Set the onClick listeners defined in EntityManager
         this.setOnTouchListener(EntityManager.onTouchListener);
@@ -131,21 +136,12 @@ public class EntityCanvas extends View {
         return new Point((int)(cameraX), (int)(cameraY));
     }
 
-    public void setCameraCoords(float x, float y){
-        cameraX = x;
-        cameraY = y;
-    }
-
     public ArrayList<Entity> getEntities() {
         return entities;
     }
     public void setEntities(ArrayList<Entity> entities) {
         this.entities.clear();
         this.entities.addAll(entities);
-    }
-
-    public void addEntity(Entity ent){
-        entities.add(ent);
     }
 
     public ArrayList<Connector> getConnectors() {
@@ -158,13 +154,30 @@ public class EntityCanvas extends View {
 
     public void setScale(boolean zoomin){
         if(zoomin) {
-            if (ZOOM_LEVEL < 1.5f)
+            if (ZOOM_LEVEL < 1.5f) {
+                Log.d("Moving camera by ",(ZOOM_LEVEL*getWidth() - (ZOOM_LEVEL-0.5)*getWidth())+" left");
+                double offsetX = ZOOM_LEVEL*getWidth() - (ZOOM_LEVEL-0.5)*getWidth();
+                double offsetY = ZOOM_LEVEL*getHeight() - (ZOOM_LEVEL-0.5)*getHeight();
+                cameraX += ZOOM_LEVEL == 1.0 ? offsetX/2 : offsetX;
+                cameraY += ZOOM_LEVEL == 1.0 ? offsetY/2 : offsetY;
                 ZOOM_LEVEL += 0.5f;
+            }
         }
-        else {
-            if (ZOOM_LEVEL > 0.5)
+        else
+            if (ZOOM_LEVEL > 0.5) {
+                // Prevent zoom out if the screen is larger than the area
+                if (this.getHeight() > (ZOOM_LEVEL-0.5) * (H_AREA_SIZE * 2 * IMAGE_SIZE_Y) ||
+                        this.getWidth() > (ZOOM_LEVEL-0.5) * (H_AREA_SIZE * 2 * IMAGE_SIZE_X))
+                    return;
+                Log.d("Moving camera by ",(ZOOM_LEVEL*getWidth() - (ZOOM_LEVEL+0.5)*getWidth())+" left");
+                double offsetX = ZOOM_LEVEL*getWidth() - (ZOOM_LEVEL+0.5)*getWidth();
+                double offsetY = ZOOM_LEVEL*getHeight() - (ZOOM_LEVEL+0.5)*getHeight();
+                cameraX += ZOOM_LEVEL == 1.5 ? offsetX/2 : offsetX;
+                cameraY += ZOOM_LEVEL == 1.5 ? offsetY/2 : offsetY;
                 ZOOM_LEVEL -= 0.5f;
-        }
+            }
+        // TODO camera position correction
+
         // Clamp camera position if the user unzooms while facing a lower/right boundary
         int bottomBound = H_AREA_SIZE  * IMAGE_SIZE_Y - (int)(this.getHeight()/ZOOM_LEVEL);
         int rightBound = H_AREA_SIZE * IMAGE_SIZE_X - (int)(this.getWidth()/ZOOM_LEVEL);
@@ -173,10 +186,6 @@ public class EntityCanvas extends View {
         if(cameraY + (int)(this.getHeight()/ZOOM_LEVEL) > bottomBound)
             cameraY -= 0.75*(this.getHeight()/ZOOM_LEVEL);
         postInvalidate();
-    }
-
-    public float getScale(){
-        return ZOOM_LEVEL;
     }
 
     @Override
@@ -198,11 +207,12 @@ public class EntityCanvas extends View {
         drawTrail(canvas);
         canvas.translate((float)cameraX, (float)cameraY);
 
-        Matrix mtx = new Matrix();
-        spaceship = BitmapFactory.decodeResource(getResources(), R.drawable.spaceship);
+        mtx.reset();
         mtx.setRotate((float)(shipHeading*180/Math.PI), 0, 0);   // rotating 180 degrees clockwise
-        mtx.postScale(0.5f, 0.5f, spaceship.getWidth() / 4, spaceship.getHeight() / 4); //default scale
-        spaceship = Bitmap.createBitmap(spaceship, 0, 0, spaceship.getWidth(), spaceship.getHeight(), mtx, true);
+        mtx.postScale(0.5f, 0.5f, spaceship_originalBMP.getWidth() / 4,
+                spaceship_originalBMP.getHeight() / 4); //default scale
+        Bitmap spaceship = Bitmap.createBitmap(spaceship_originalBMP, 0, 0,
+                spaceship_originalBMP.getWidth(), spaceship_originalBMP.getHeight(), mtx, true);
         float spaceshipX = this.getWidth()/2/ZOOM_LEVEL-spaceship.getWidth()/2;
         float spaceshipY = this.getHeight()/2/ZOOM_LEVEL-spaceship.getHeight()/2;
         canvas.drawBitmap(spaceship, spaceshipX, spaceshipY, null);
@@ -217,20 +227,23 @@ public class EntityCanvas extends View {
             splashes.add(trailBmp);
             paint.setAlpha(splash_alphas[i]);
             if (splash_alphas[i] > 3) splash_alphas[i] -= 3;
-            canvas.drawBitmap(splashes.get(i), splash_xcoords[i] - splashes.get(i).getWidth() / 2, splash_ycoords[i] - splashes.get(i).getWidth() / 2, paint);
+            canvas.drawBitmap(splashes.get(i), splash_xcoords[i] - splashes.get(i).getWidth() / 2,
+                    splash_ycoords[i] - splashes.get(i).getWidth() / 2, paint);
         }
     }
+
+    public void checkScreenSizeBounds() {
+        // If the screen is larger than the relevant canvas dimension, zoom in
+        if (this.getHeight() > ZOOM_LEVEL * (H_AREA_SIZE * 2 * IMAGE_SIZE_Y) ||
+                this.getWidth() > ZOOM_LEVEL * (H_AREA_SIZE * 2 * IMAGE_SIZE_X))
+            setScale(true);
+    }
+
     /**
      * Class describring a connector line, with its startpoint and endpoint defined.
      */
     public static class Connector{
         public Entity start, end;
-
-        // Connector is defined by the start entity and the end entity
-        public Connector(Entity start, Entity end){
-            this.start = start;
-            this.end = end;
-        }
 
         public void drawConnector(Canvas canvas){
             Paint paint = new Paint();

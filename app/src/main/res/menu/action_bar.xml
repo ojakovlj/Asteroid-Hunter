@@ -3,16 +3,16 @@
     <item
         android:id="@+id/action_zoomout"
         android:icon="@drawable/zoomout"
-        android:title="Zoom out"
+        android:title="@string/zoomout"
         yourapp:showAsAction="always" />
     <item
         android:id="@+id/action_zoomin"
         android:icon="@drawable/zoomin"
-        android:title="Zoom in"
+        android:title="@string/zoomin"
         yourapp:showAsAction="always" />
     <item
         android:id="@+id/action_clear"
         android:icon="@drawable/clear"
-        android:title="Clear save"
+        android:title="@string/clearsave"
         yourapp:showAsAction="always" />
 </menu>

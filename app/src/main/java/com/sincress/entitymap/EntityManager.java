@@ -2,12 +2,10 @@ package com.sincress.entitymap;
 
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,15 +17,12 @@ import com.sincress.entitymap.Entities.ImgTextEntity;
 import com.sincress.entitymap.Entities.Planet;
 import com.sincress.entitymap.EntityCanvas.Connector;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 
 public class EntityManager {
@@ -45,34 +40,9 @@ public class EntityManager {
             oos.writeObject(array);
             oos.close();
             fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static ArrayList<Entity> loadEntities(String filename){
-        ArrayList<Entity> array = new ArrayList<Entity>();
-        Context ctx = entityCanvas.getActivity().getApplicationContext();
-
-        try {
-            FileInputStream fis = ctx.openFileInput(filename);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            array = (ArrayList<Entity>) ois.readObject();
-            ois.close();
-            fis.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (StreamCorruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return array;
     }
 
     public static void setCanvasInstance(EntityCanvas instance){
@@ -83,6 +53,7 @@ public class EntityManager {
      * Iterates through the given array of entities and returns true if the given
      * coordinate is inside one of the entity rectangles.
      * @param array Array of available entities
+     *
      * @param coordinate Coordinate to test
      * @return True if inside any entity, false otherwise
      */
@@ -241,6 +212,8 @@ public class EntityManager {
         entities.add(new Asteroid(1, new Point(200, 100)));
         entities.add(new Asteroid(2, new Point(-300, -300)));
         entities.add(new Asteroid(3, new Point(0, -500)));
+        // Causes crash, TODO check JSON file
+        //entities.add(new Asteroid(4, new Point(-500, 200)));
 
         Planet earth = new Planet("", "Welcome to planet Earth!",
                 new Point(2091-entityCanvas.IMAGE_SIZE_X*entityCanvas.H_AREA_SIZE,

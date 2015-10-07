@@ -13,14 +13,10 @@ import com.sincress.entitymap.Models.JSONReader;
 import com.sincress.entitymap.Models.PlanetModel;
 import com.sincress.entitymap.R;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Planet implements Entity, Serializable {
-    private int resourceId;
     private Point position;
     private boolean isSelected;
     public String imageFile, textContent;
@@ -29,16 +25,11 @@ public class Planet implements Entity, Serializable {
 
     public Planet(String img, String text, Point pos){
         this.imageFile = img;
-        this.resourceId = R.raw.zemlja;
+        int resourceId = R.raw.zemlja;
         this.textContent = text;
         this.position = pos;
         this.bitmap = BitmapFactory.decodeResource(EntityManager.entityCanvas.getResources(), R.drawable.earth);
         this.model = new PlanetModel(JSONReader.getJSONObject(resourceId), this);
-    }
-
-    @Override
-    public int getRawId() {
-        return resourceId;
     }
 
     @Override
@@ -53,21 +44,6 @@ public class Planet implements Entity, Serializable {
     }
 
     @Override
-    public void setSelected(boolean isSelected) {
-        this.isSelected = isSelected;
-    }
-
-    @Override
-    public boolean isSelected() {
-        return this.isSelected;
-    }
-
-    @Override
-    public void setPosition(Point position) {
-        this.position = position;
-    }
-
-    @Override
     public Point getPosition() {
         return this.position;
     }
@@ -75,20 +51,6 @@ public class Planet implements Entity, Serializable {
     @Override
     public EntityType getType() {
         return EntityType.Planet;
-    }
-
-    private void writeObject(ObjectOutputStream out) throws IOException {
-        out.writeObject(imageFile);
-        out.writeObject(textContent);
-        out.writeInt(position.x);
-        out.writeInt(position.y);
-    }
-
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        this.imageFile = (String) in.readObject();
-        this.textContent = (String) in.readObject();
-        this.position = new Point(in.readInt(), in.readInt());
-        this.bitmap = BitmapFactory.decodeResource(EntityManager.entityCanvas.getResources(), R.drawable.earth);
     }
 
     public ArrayList<ImgTextEntity> getInfoboxes() {

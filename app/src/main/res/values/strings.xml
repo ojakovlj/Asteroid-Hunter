@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Asteroid Hunter</string>
-
+    <string name="zoomin">Zoom in</string>
+    <string name="zoomout">Zoom out</string>
     <string name="closefragment">Close</string>
-
+    <string name="clearsave">Clear Save</string>
+    <string name="close">Close</string>
 </resources>

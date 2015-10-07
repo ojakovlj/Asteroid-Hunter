@@ -3,7 +3,6 @@ package com.sincress.entitymap.Models;
 import android.content.res.Resources;
 
 import com.sincress.entitymap.EntityManager;
-import com.sincress.entitymap.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,8 +35,6 @@ public class JSONReader {
             result = writer.toString();
             is.close();
             writer.close();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

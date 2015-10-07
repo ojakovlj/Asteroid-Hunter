@@ -12,25 +12,21 @@ import com.sincress.entitymap.Models.InfoBoxModel;
 import com.sincress.entitymap.Models.JSONReader;
 import com.sincress.entitymap.R;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Asteroid implements Entity, Serializable {
-    private int id;
     private int rawId;
-    private int drawableId;
     private Point position;
     private boolean isSelected;
     private Bitmap bitmap;
     private AsteroidModel model;
 
     public Asteroid(int id, Point position) {
-        this.id = id;
+        int id1 = id;
         this.position = position;
-        switch (this.id) {
+        int drawableId;
+        switch (id1) {
             case 1:
             default:
                 drawableId = R.drawable.asteroid1;
@@ -53,11 +49,6 @@ public class Asteroid implements Entity, Serializable {
     }
 
     @Override
-    public int getRawId() {
-        return rawId;
-    }
-
-    @Override
     public void drawEntity(Canvas canvas) {
         Paint paint = new Paint();
         canvas.drawBitmap(bitmap, (float)position.x, (float)position.y, paint);
@@ -66,21 +57,6 @@ public class Asteroid implements Entity, Serializable {
     @Override
     public Point getEntityDimens() {
         return new Point(bitmap.getWidth(), bitmap.getHeight());
-    }
-
-    @Override
-    public void setSelected(boolean isSelected) {
-        this.isSelected = isSelected;
-    }
-
-    @Override
-    public boolean isSelected() {
-        return this.isSelected;
-    }
-
-    @Override
-    public void setPosition(Point position) {
-        this.position = position;
     }
 
     @Override
@@ -93,11 +69,6 @@ public class Asteroid implements Entity, Serializable {
         return EntityType.Asteroid;
     }
 
-    public int GetId()
-    {
-        return id;
-    }
-
     public ArrayList<ImgTextEntity> getInfoboxes() {
         ArrayList<ImgTextEntity> entities = new ArrayList<>();
         for (InfoBoxModel infobox : model.infoboxes)
@@ -107,19 +78,4 @@ public class Asteroid implements Entity, Serializable {
         return entities;
     }
 
-    private void writeObject(ObjectOutputStream out) throws IOException {
-        out.writeInt(this.id);
-        out.writeInt(this.rawId);
-        out.writeInt(this.position.x);
-        out.writeInt(this.position.y);
-    }
-
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        this.id = in.readInt();
-        this.rawId = in.readInt();
-        this.position = new Point(in.readInt(), in.readInt());
-        this.model = new AsteroidModel(JSONReader.getJSONObject(this.rawId), this);
-
-        this.bitmap = BitmapFactory.decodeResource(EntityManager.entityCanvas.getResources(), this.drawableId);
-    }
 }

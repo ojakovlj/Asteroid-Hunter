@@ -1,15 +1,15 @@
 package com.sincress.entitymap;
 
-import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.graphics.drawable.ColorDrawable;
+import android.content.res.Configuration;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.sincress.entitymap.Abstract.Entity;
 
@@ -20,6 +20,18 @@ public class CanvasActivity extends ActionBarActivity{
     private EntityCanvas entityCanvas;
     private PromptFragment fragment;
     private FragmentManager manager;
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen and if the canvas needs to be zoomed in
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            entityCanvas.checkScreenSizeBounds();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            entityCanvas.checkScreenSizeBounds();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,18 +70,6 @@ public class CanvasActivity extends ActionBarActivity{
             transaction.remove(fragment);
             transaction.commit();
         }
-    }
-
-    /**
-     * Called by prompt fragment's CANCEL button. Just removes the fragment.
-     * @param v
-     */
-    public void removeFragment(View v){
-        FragmentTransaction transaction = this.getFragmentManager().beginTransaction();
-        transaction.remove(fragment);
-        transaction.commit();
-        // Bring the canvas to top
-        findViewById(R.id.canvas).bringToFront();
     }
 
     @Override
